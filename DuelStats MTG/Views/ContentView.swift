@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    @EnvironmentObject private var viewModel: MainVM
+    @Environment(\.modelContext) var modelContext
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -17,8 +21,4 @@ struct ContentView: View {
         }
         .padding()
     }
-}
-
-#Preview {
-    ContentView()
 }

@@ -1,0 +1,71 @@
+//
+//  AddPlayerSheet.swift
+//  DuelStats MTG
+//
+//  Created by Alvaro Santos Orellana on 10/9/24.
+//
+
+import SwiftUI
+
+struct AddPlayerSheet: View {
+    @EnvironmentObject private var viewModel: MainVM
+    @Environment(\.modelContext) var modelContext
+    
+    @State var name: String = ""
+    @State var deckName: String = ""
+    @State var format: Format = .casual
+    @Binding var sheet: Bool
+    
+    var body: some View {
+        VStack {
+            Group {
+                TextField("Player Name", text: $name)
+                    .textInputAutocapitalization(.never)
+                
+                TextField("Deck name", text: $deckName)
+                    .textInputAutocapitalization(.words)
+                    .onChange(of: deckName) {
+                                    if deckName.count > 12 {
+                                        deckName = String(deckName.prefix(12))
+                                    }
+                                }
+            }
+            .autocorrectionDisabled()
+            .lineLimit(1)
+            
+            HStack {
+                Text("Format:")
+                Spacer()
+                Picker("Format", selection: $format) {
+                    ForEach(Format.allCases, id: \.rawValue) { format in
+                        Text(format.rawValue.capitalized).tag(format)
+                    }
+                }
+                .pickerStyle(.menu)
+                .fontWeight(.semibold)
+            }
+            
+            Button {
+                sheet.toggle()
+                addPlayer()
+                name = ""
+                deckName = ""
+                format = .casual
+            } label: {
+                Text("Add Player")
+            }
+            .buttonStyle(.borderedProminent)
+            .font(.headline)
+            .disabled(!viewModel.isInputValid(name: name, deck: deckName, format: format))
+            
+        }
+        .padding()
+        .presentationDetents([.fraction(1/4)])
+        .tint(.salmon)
+    }
+    
+    func addPlayer() {
+        let player: Player = Player(name: name, decks: [Deck(name: deckName, format: format.rawValue)], matches: [])
+        modelContext.insert(player)
+    }
+}
