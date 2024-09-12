@@ -11,29 +11,87 @@ import SwiftData
 struct MatchesPlayedView: View {
     @Environment(\.modelContext) var modelContext
     @Query(sort: \SingleMatch.date, order: .reverse) var matches: [SingleMatch]
+    @Query var players: [Player]
+    
+    @State private var showInfo: Bool = false
+    @State private var search: String = ""
+    
+    var filteredSearch: [SingleMatch] {
+        if !search.isEmpty {
+            let lowercasedSearch = search.lowercased()
+                return matches.filter { match in
+                    match.playersID.contains { id in
+                        guard let player = players.first(where: { $0.id == id }) else { return false }
+                        return player.name.lowercased().contains(lowercasedSearch)
+                    }
+                }
+        }
+        
+        return matches
+    }
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(matches, id: \.self) { match in
-                    VStack(alignment: .leading) {
-                        Text("\(match.date.formatted())")
-                            .font(.headline)
-                            .foregroundStyle(.white)
-                        
-                        ForEach(matches, id: \.self) { match in
-                            Text("Winner: \(match.winner.name)")
-                            
-                            Text("Players: \(match.players)")
-                            
-                            Text(match.date.description)
+            ZStack {
+                List {
+                    ForEach(filteredSearch, id: \.self) { match in
+                            VStack(alignment: .leading) {
+                                Text("\(match.date.formatted())")
+                                    .font(.headline)
+                                    .foregroundStyle(.white)
+                                
+                                
+                                ForEach(players.filter({ player in match.playersID.contains(player.id) }) , id: \.self) { player in
+                                    
+                                    HStack {
+                                        Image(systemName: "crown.fill")
+                                            .foregroundStyle(.yellow)
+                                            .opacity(player.id == match.winnerID ? 1.0 : 0.0)
+                                            .font(.footnote)
+                                        
+                                        Text(player.name)
+                                            .font(.subheadline)
+                                            .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
+                                        
+                                        Spacer()
+                                        
+                                        if let deck = player.decks.first(where: { deck in
+                                            match.decksID.contains(deck.id)
+                                        }) {
+                                            HStack {
+                                                Text(deck.name)
+                                                Text("(\(deck.format.capitalized))")
+                                                    .foregroundStyle(.secondary)
+                                                    .font(.footnote)
+                                            }
+                                            .font(.subheadline)
+                                            .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
+                                        }
+                                    }
+                                }
                         }
                     }
+                    .onDelete(perform: deleteMatch(_:))
                 }
-                .onDelete(perform: deleteMatch(_:))
+                .scrollIndicators(.never)
+                .disabled(showInfo ? true: false)
+                .blur(radius: showInfo ? 3 : 0)
+                
+                InfoPopUp(showInfo: $showInfo, title: "You can swipe left to delete any match", subtitle: "Be careful, this action will remove the match permanently!", message: "")
             }
+            .searchable(text: $search, prompt: "Search for player")
             .navigationTitle("Matches")
             .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showInfo.toggle()
+                    } label: {
+                        Image(systemName: "info.circle")
+                    }
+                    .foregroundStyle(.link)
+                }
+            }
         }
     }
     
@@ -43,8 +101,4 @@ struct MatchesPlayedView: View {
             modelContext.delete(match)
         }
     }
-}
-
-#Preview {
-    MatchesPlayedView()
 }

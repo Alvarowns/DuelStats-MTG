@@ -13,7 +13,7 @@ class Player: Hashable {
     @Attribute(.unique) var id = UUID()
     var name: String
     var decks: [Deck]
-    var matches: [SingleMatch]
+    @Relationship var matches: [SingleMatch]
     
     init(id: UUID = UUID(), name: String, decks: [Deck], matches: [SingleMatch]) {
         self.id = id

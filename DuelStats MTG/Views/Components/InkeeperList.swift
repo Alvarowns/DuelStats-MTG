@@ -13,8 +13,7 @@ struct InkeeperList: View {
     @Environment(\.modelContext) var modelContext
     @Query var players: [Player]
     
-    @Binding var search: String
-    
+    @State private var search: String = ""
     @State private var deckSheet: Bool = false
     @State private var deckName: String = ""
     @State private var playerNewDeck: Player = Player(name: "", decks: [], matches: [])
@@ -41,65 +40,68 @@ struct InkeeperList: View {
             )
         } else {
             NavigationStack {
-                List {
-                    ForEach(filteredSearch, id: \.self) { player in
-                        VStack {
-                            HStack {
-                                Text(player.name)
-                                    .font(.title2)
-                                    .bold()
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                
-                                Spacer()
-                                
-                                Button {
-                                    if !viewModel.playersSelected.keys.contains(player) {
-                                        viewModel.selectPlayer(player, withDeck: player.decks.first ?? Deck(name: "", format: ""))
-                                    } else {
-                                        viewModel.unselectPlayer(player)
-                                    }
-                                } label: {
-                                    Image(systemName: viewModel.playersSelected.keys.contains(player) ? "circlebadge.fill" : "circlebadge")
-                                        .foregroundStyle(viewModel.playersSelected.keys.contains(player) ? .salmon : .secondary)
-                                        .imageScale(.large)
-                                }
-                            }
-                            
-                            if viewModel.playersSelected.keys.contains(player) {
-                                Divider()
-                                Section {
-                                    DecksInkeeperList(player: player)
-                                } header: {
-                                    Text("Decks")
-                                        .font(.subheadline)
-                                        .foregroundStyle(.secondary)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .contentShape(Rectangle())
-                                .onTapGesture {}
-                                
-                                Spacer()
-                                
+                ZStack {
+                    List {
+                        ForEach(filteredSearch, id: \.self) { player in
+                            VStack {
                                 HStack {
-                                    Text("New deck")
+                                    Text(player.name)
+                                        .font(.title2)
+                                        .bold()
+                                        .frame(maxWidth: .infinity, alignment: .leading)
                                     
-                                    Image(systemName: "plus")
+                                    Spacer()
+                                    
+                                    Button {
+                                        if !viewModel.playersSelected.keys.contains(player) {
+                                            viewModel.selectPlayer(player, withDeck: player.decks.first ?? Deck(name: "", format: ""))
+                                        } else {
+                                            viewModel.unselectPlayer(player)
+                                        }
+                                    } label: {
+                                        Image(systemName: viewModel.playersSelected.keys.contains(player) ? "circlebadge.fill" : "circlebadge")
+                                            .foregroundStyle(viewModel.playersSelected.keys.contains(player) ? .green : .secondary)
+                                            .imageScale(.large)
+                                    }
                                 }
-                                .font(.subheadline)
-                                .padding(.bottom, 5)
-                                .foregroundStyle(.salmon)
-                                .fontWeight(.semibold)
-                                .onTapGesture {
-                                    playerNewDeck = player
-                                    deckSheet.toggle()
+                                
+                                if viewModel.playersSelected.keys.contains(player) {
+                                    Divider()
+                                    Section {
+                                        DecksInkeeperList(player: player)
+                                    } header: {
+                                        Text("Decks")
+                                            .font(.subheadline)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {}
+                                    
+                                    Spacer()
+                                    
+                                    HStack {
+                                        Text("New deck")
+                                        
+                                        Image(systemName: "plus")
+                                    }
+                                    .font(.subheadline)
+                                    .padding(.bottom, 5)
+                                    .foregroundStyle(.salmon)
+                                    .fontWeight(.semibold)
+                                    .onTapGesture {
+                                        playerNewDeck = player
+                                        deckSheet.toggle()
+                                    }
                                 }
                             }
+                            .searchable(text: $search, prompt: "Search for a player")
+                            .sheet(isPresented: $deckSheet) {
+                                AddDeckSheet(sheet: $deckSheet, player: $playerNewDeck)
+                            }
                         }
-                        .sheet(isPresented: $deckSheet) {
-                            AddDeckSheet(sheet: $deckSheet, player: $playerNewDeck)
-                        }
+                        .onDelete(perform: deletePlayer)
                     }
-                    .onDelete(perform: deletePlayer)
                 }
             }
         }

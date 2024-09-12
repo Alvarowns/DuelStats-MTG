@@ -45,6 +45,7 @@ struct DecksInkeeperList: View {
             
         }
         .listStyle(.plain)
+        .scrollIndicators(.never)
         .frame(height: 125)
     }
     

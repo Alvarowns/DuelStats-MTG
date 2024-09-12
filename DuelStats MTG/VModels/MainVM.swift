@@ -14,6 +14,8 @@ class MainVM: ObservableObject {
     var changeLife: Bool = false
     var changePlayersNumbers: Bool = false
     
+    var gameStarted: Bool = false
+    
     var playersSelected: [Player: Deck] = [:]
     
     let colors: [Color] = [.swampColor1, .salmon, .isle, .forest, .orchid, .swamp, .bubblegum]

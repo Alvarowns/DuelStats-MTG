@@ -11,7 +11,6 @@ import SwiftData
 @main
 struct DuelStats_MTGApp: App {
     @StateObject private var mainVM = MainVM()
-    @StateObject private var matchVM = MatchVM()
     
     let modelContainer: ModelContainer
     
@@ -29,7 +28,6 @@ struct DuelStats_MTGApp: App {
                 .preferredColorScheme(.dark)
         }
         .environmentObject(MainVM())
-        .environmentObject(MatchVM())
         .modelContainer(modelContainer)
     }
 }

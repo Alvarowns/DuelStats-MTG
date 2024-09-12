@@ -8,27 +8,30 @@
 import SwiftUI
 
 struct TabBarView: View {
+    @EnvironmentObject private var viewModel: MainVM
+    
     var body: some View {
-        TabView {
-            MatchesPlayedView()
-                .tabItem {
-                    VStack {
-                        Image(systemName: "list.bullet.rectangle.portrait.fill")
-                        Text("Matches")
+        if !viewModel.gameStarted {
+            TabView {
+                MatchesPlayedView()
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "list.bullet.rectangle.portrait.fill")
+                            Text("Matches")
+                        }
                     }
-                }
-            
-            SetpUpGame()
-                .tabItem {
-                    VStack {
-                        Image(systemName: "person.3.fill")
-                        Text("Inkeeper")
+                
+                SetpUpGame()
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "rectangle.portrait.on.rectangle.portrait.angled.fill")
+                            Text("Start Game")
+                        }
                     }
-                }
+            }
+            .tint(.salmon)
+        } else {
+            MatchView(players: viewModel.playersSelected)
         }
     }
-}
-
-#Preview {
-    TabBarView()
 }

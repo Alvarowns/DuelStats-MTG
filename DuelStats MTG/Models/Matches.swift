@@ -11,18 +11,18 @@ import SwiftData
 @Model
 class SingleMatch: Hashable {
     @Attribute(.unique)  var id = UUID()
-    var players: [Player]
-    var decks: [Deck]
-    var winner: Player
-    var winnerDeck: Deck
+    var playersID: [UUID]
+    var decksID: [UUID]
+    var winnerID: UUID
+    var winnerDeckID: UUID
     var date: Date
     
-    init(id: UUID = UUID(), players: [Player], decks: [Deck], winner: Player, winnerDeck: Deck, date: Date) {
+    init(id: UUID = UUID(), playersID: [UUID], decksID: [UUID], winnerID: UUID, winnerDeckID: UUID, date: Date) {
         self.id = id
-        self.players = players
-        self.decks = decks
-        self.winner = winner
-        self.winnerDeck = winnerDeck
+        self.playersID = playersID
+        self.decksID = decksID
+        self.winnerID = winnerID
+        self.winnerDeckID = winnerDeckID
         self.date = date
     }
 }

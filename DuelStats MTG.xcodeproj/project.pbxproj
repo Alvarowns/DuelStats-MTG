@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C71813592C920DFA00788C2B /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71813582C920DFA00788C2B /* TabBarView.swift */; };
+		C719EEFC2C93637C00C9177A /* InfoPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C719EEFB2C93637C00C9177A /* InfoPopUp.swift */; };
 		C7419BFA2C9052A7006BA8AE /* DuelStats_MTGApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7419BF92C9052A7006BA8AE /* DuelStats_MTGApp.swift */; };
 		C7419BFE2C9052A9006BA8AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7419BFD2C9052A9006BA8AE /* Assets.xcassets */; };
 		C7419C012C9052A9006BA8AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7419C002C9052A9006BA8AE /* Preview Assets.xcassets */; };
@@ -23,11 +24,11 @@
 		C7A74FDD2C91BBC200DE2D4E /* DecksInkeeperList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A74FDC2C91BBC200DE2D4E /* DecksInkeeperList.swift */; };
 		C7A74FDF2C91F7BF00DE2D4E /* MatchesPlayedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A74FDE2C91F7BF00DE2D4E /* MatchesPlayedView.swift */; };
 		C7A74FE32C91FF2800DE2D4E /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A74FE22C91FF2800DE2D4E /* MatchView.swift */; };
-		C7A74FE52C91FF9600DE2D4E /* MatchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A74FE42C91FF9600DE2D4E /* MatchVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C71813582C920DFA00788C2B /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		C719EEFB2C93637C00C9177A /* InfoPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopUp.swift; sourceTree = "<group>"; };
 		C7419BF62C9052A7006BA8AE /* DuelStats MTG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DuelStats MTG.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7419BF92C9052A7006BA8AE /* DuelStats_MTGApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelStats_MTGApp.swift; sourceTree = "<group>"; };
 		C7419BFD2C9052A9006BA8AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -44,7 +45,6 @@
 		C7A74FDC2C91BBC200DE2D4E /* DecksInkeeperList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksInkeeperList.swift; sourceTree = "<group>"; };
 		C7A74FDE2C91F7BF00DE2D4E /* MatchesPlayedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesPlayedView.swift; sourceTree = "<group>"; };
 		C7A74FE22C91FF2800DE2D4E /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
-		C7A74FE42C91FF9600DE2D4E /* MatchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				C7419C102C9053A1006BA8AE /* MainVM.swift */,
-				C7A74FE42C91FF9600DE2D4E /* MatchVM.swift */,
 			);
 			path = VModels;
 			sourceTree = "<group>";
@@ -142,6 +141,7 @@
 				C7A74FDC2C91BBC200DE2D4E /* DecksInkeeperList.swift */,
 				C7A74FD22C90B25C00DE2D4E /* AddPlayerSheet.swift */,
 				C7A74FDA2C91939F00DE2D4E /* AddDeckSheet.swift */,
+				C719EEFB2C93637C00C9177A /* InfoPopUp.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -220,12 +220,12 @@
 				C7A74FE32C91FF2800DE2D4E /* MatchView.swift in Sources */,
 				C7A74FDB2C91939F00DE2D4E /* AddDeckSheet.swift in Sources */,
 				C7A74FCF2C90663C00DE2D4E /* ContainerModel.swift in Sources */,
-				C7A74FE52C91FF9600DE2D4E /* MatchVM.swift in Sources */,
 				C7419C112C9053A1006BA8AE /* MainVM.swift in Sources */,
 				C7419C0E2C905309006BA8AE /* Matches.swift in Sources */,
 				C7419C0F2C905309006BA8AE /* PlayerModel.swift in Sources */,
 				C7A74FD52C90CD9500DE2D4E /* InkeeperList.swift in Sources */,
 				C7A74FD32C90B25C00DE2D4E /* AddPlayerSheet.swift in Sources */,
+				C719EEFC2C93637C00C9177A /* InfoPopUp.swift in Sources */,
 				C7A74FD12C90A29300DE2D4E /* Enums.swift in Sources */,
 				C7A74FDF2C91F7BF00DE2D4E /* MatchesPlayedView.swift in Sources */,
 				C7419BFA2C9052A7006BA8AE /* DuelStats_MTGApp.swift in Sources */,
