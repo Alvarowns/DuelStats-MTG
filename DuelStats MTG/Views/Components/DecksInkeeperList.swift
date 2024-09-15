@@ -41,7 +41,7 @@ struct DecksInkeeperList: View {
                 }
                 .font(.subheadline)
             }
-            .onDelete {deleteDeck(at: $0, in: player) }
+            .onDelete { deleteDeck(at: $0, in: player) }
             
         }
         .listStyle(.plain)

@@ -10,6 +10,10 @@ import SwiftUI
 struct TabBarView: View {
     @EnvironmentObject private var viewModel: MainVM
     
+    init() {
+        UITabBar.appearance().unselectedItemTintColor = UIColor.white
+        }
+    
     var body: some View {
         if !viewModel.gameStarted {
             TabView {
@@ -21,17 +25,26 @@ struct TabBarView: View {
                         }
                     }
                 
-                SetpUpGame()
+                PrepareMatch()
                     .tabItem {
                         VStack {
                             Image(systemName: "rectangle.portrait.on.rectangle.portrait.angled.fill")
-                            Text("Start Game")
+                            Text("Play")
+                        }
+                    }
+                
+                
+                PlayersView()
+                    .tabItem {
+                        VStack {
+                            Image(systemName: "person.3.fill")
+                            Text("Players")
                         }
                     }
             }
-            .tint(.salmon)
+            .tint(.orange)
         } else {
-            MatchView(players: viewModel.playersSelected)
+            MatchView()
         }
     }
 }

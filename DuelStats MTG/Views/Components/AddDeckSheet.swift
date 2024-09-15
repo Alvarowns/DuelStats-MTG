@@ -13,9 +13,10 @@ struct AddDeckSheet: View {
     
     @State private var deckName: String = ""
     @State private var format: Format = .casual
+    
     @Binding var sheet: Bool
     
-    @Binding var player: Player
+    var player: Player
     
     var body: some View {
         VStack {

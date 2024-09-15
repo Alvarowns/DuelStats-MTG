@@ -19,6 +19,9 @@ struct AddPlayerSheet: View {
     var body: some View {
         VStack {
             Group {
+                Text("You can add more decks and edit them later!")
+                    .padding(.bottom)
+                
                 TextField("Player Name", text: $name)
                     .textInputAutocapitalization(.never)
                 
@@ -53,6 +56,7 @@ struct AddPlayerSheet: View {
                 format = .casual
             } label: {
                 Text("Add Player")
+                    .foregroundStyle(.black)
             }
             .buttonStyle(.borderedProminent)
             .font(.headline)
@@ -61,11 +65,11 @@ struct AddPlayerSheet: View {
         }
         .padding()
         .presentationDetents([.fraction(1/4)])
-        .tint(.salmon)
+        .tint(.orange)
     }
     
     func addPlayer() {
-        let player: Player = Player(name: name, decks: [Deck(name: deckName, format: format.rawValue)], matches: [])
+        let player: Player = Player(name: name, decks: [Deck(name: deckName, format: format.rawValue)], favorite: false, matches: [])
         modelContext.insert(player)
     }
 }

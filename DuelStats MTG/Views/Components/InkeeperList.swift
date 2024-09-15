@@ -16,7 +16,7 @@ struct InkeeperList: View {
     @State private var search: String = ""
     @State private var deckSheet: Bool = false
     @State private var deckName: String = ""
-    @State private var playerNewDeck: Player = Player(name: "", decks: [], matches: [])
+    @State private var playerNewDeck: Player = Player(name: "", decks: [], favorite: false, matches: [])
     
     var filteredSearch: [Player] {
         if !search.isEmpty {
@@ -26,86 +26,70 @@ struct InkeeperList: View {
     }
     
     var body: some View {
-        if players.isEmpty {
-            ContentUnavailableView(
-                "There are no players yet",
-                systemImage: "person.slash.fill",
-                description: Text("Add new players!")
-            )
-        } else if filteredSearch.isEmpty {
-            ContentUnavailableView(
-                "There are no players that matches that name",
-                systemImage: "person.slash.fill",
-                description: Text("Try with another name!")
-            )
-        } else {
             NavigationStack {
                 ZStack {
-                    List {
-                        ForEach(filteredSearch, id: \.self) { player in
-                            VStack {
-                                HStack {
-                                    Text(player.name)
-                                        .font(.title2)
-                                        .bold()
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    
-                                    Spacer()
-                                    
-                                    Button {
-                                        if !viewModel.playersSelected.keys.contains(player) {
-                                            viewModel.selectPlayer(player, withDeck: player.decks.first ?? Deck(name: "", format: ""))
-                                        } else {
-                                            viewModel.unselectPlayer(player)
+                    if players.isEmpty {
+                        ContentUnavailableView(
+                            "There are no players yet",
+                            systemImage: "person.slash.fill",
+                            description: Text("Add new players!")
+                        )
+                        .shadowPop()
+                    } else if filteredSearch.isEmpty {
+                        ContentUnavailableView(
+                            "There are no players that matches that name",
+                            systemImage: "person.slash.fill",
+                            description: Text("Try with another name!")
+                        )
+                        .shadowPop()
+                    } else {
+                        List {
+                            ForEach(filteredSearch, id: \.self) { player in
+                                NavigationLink(value: player) {
+                                    VStack {
+                                        HStack {
+                                            Image(systemName: "star.fill")
+                                                .font(.title2)
+                                                .foregroundStyle(.yellow)
+                                                .opacity(player.favorite ? 1.0 : 0.0)
+                                            
+                                            
+                                            Text(player.name)
+                                                .font(.title2)
+                                                .bold()
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                            
+                                            Spacer()
                                         }
-                                    } label: {
-                                        Image(systemName: viewModel.playersSelected.keys.contains(player) ? "circlebadge.fill" : "circlebadge")
-                                            .foregroundStyle(viewModel.playersSelected.keys.contains(player) ? .green : .secondary)
-                                            .imageScale(.large)
+                                        .padding(.vertical, 10)
                                     }
                                 }
-                                
-                                if viewModel.playersSelected.keys.contains(player) {
-                                    Divider()
-                                    Section {
-                                        DecksInkeeperList(player: player)
-                                    } header: {
-                                        Text("Decks")
-                                            .font(.subheadline)
-                                            .foregroundStyle(.secondary)
+                                .listRowBackground(
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .foregroundStyle(.black.opacity(0.6))
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(lineWidth: 3)
+                                            .foregroundStyle(.black)
                                     }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .contentShape(Rectangle())
-                                    .onTapGesture {}
-                                    
-                                    Spacer()
-                                    
-                                    HStack {
-                                        Text("New deck")
-                                        
-                                        Image(systemName: "plus")
-                                    }
-                                    .font(.subheadline)
-                                    .padding(.bottom, 5)
-                                    .foregroundStyle(.salmon)
-                                    .fontWeight(.semibold)
-                                    .onTapGesture {
-                                        playerNewDeck = player
-                                        deckSheet.toggle()
-                                    }
-                                }
+                                )
                             }
-                            .searchable(text: $search, prompt: "Search for a player")
+                            .onDelete(perform: deletePlayer)
                             .sheet(isPresented: $deckSheet) {
-                                AddDeckSheet(sheet: $deckSheet, player: $playerNewDeck)
+                                AddDeckSheet(sheet: $deckSheet, player: playerNewDeck)
                             }
                         }
-                        .onDelete(perform: deletePlayer)
+                        .padding()
+                        .listStyle(.plain)
+                        .navigationDestination(for: Player.self) { player in
+                            Text(player.name)
+                            Text(player.decks.first?.name ?? "")
+//                            PlayerProfile(player: player)
+                        }
                     }
                 }
+                .searchable(text: $search, prompt: "Search for a player")
             }
-        }
-        
     }
     
     func deletePlayer(_ indexSet: IndexSet) {

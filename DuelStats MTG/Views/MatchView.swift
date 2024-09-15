@@ -13,66 +13,88 @@ struct MatchView: View {
     @Environment(\.modelContext) var modelContext
     
     @State private var someoneWon: Bool = false
-    @State private var winner: Player = Player(name: "", decks: [], matches: [])
+    @State private var winner: Player = Player(name: "", decks: [], favorite: false, matches: [])
     @State private var winnerDeck: Deck = Deck(name: "", format: "")
     @State private var goBackAlert: Bool = false
     
-    let players: [Player: Deck]
-    
     var body: some View {
-        NavigationStack {
+        GeometryReader { geometry in
             VStack {
-                ForEach(players.keys.sorted(by: { $0.name > $1.name }), id: \.self) { player in
-                    HStack {
-                        Text(player.name)
-                        Text(players[player]?.name ?? "ERROR NOMBRE DECK")
-                        Button {
-                            winner = player
-                            winnerDeck = players[player] ?? Deck(name: "", format: "")
-                            someoneWon.toggle()
-                        } label:{
-                            Image(systemName: "crown.fill")
-                        }
-                    }
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        if viewModel.gameStarted {
-                            goBackAlert.toggle()
-                        }
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .bold()
-                            .font(.title3)
-                            .foregroundStyle(.salmon)
-                    }
-                }
-            }
-            .navigationBarBackButtonHidden()
-            .alert("\(winner.name) has won?", isPresented: $someoneWon) {
-                Button("Yes") {
-                    recordWinner(winner: winner, withDeck: winnerDeck)
-                }
-                Button("No", role: .destructive) {
+                if viewModel.playersSelected.count == 2 {
+                    PlayerView(player: Array(viewModel.playersSelected.keys)[0])
+                        .rotation3DEffect(.degrees(180), axis: (x: 0.0, y: 1.0, z: 0.0))
+                        .scaleEffect(x: 1, y: -1, anchor: .center)
                     
+                    HStack {
+                        Spacer()
+                        
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "arrow.circlepath")
+                        }
+                        
+                        Spacer()
+                        
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "heart")
+                        }
+                        
+                        Spacer()
+                        
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "dice")
+                        }
+                        
+                        Spacer()
+                    }
+                    .font(.title2)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    
+                    PlayerView(player: Array(viewModel.playersSelected.keys)[1])
                 }
             }
-            .alert("Are you sure you want to end this game?", isPresented: $goBackAlert, actions: {
-                Button("Yes") {
-                    viewModel.gameStarted = false
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    if viewModel.gameStarted {
+                        goBackAlert.toggle()
+                    }
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .bold()
+                        .font(.title3)
+                        .foregroundStyle(.salmon)
                 }
+            }
+        }
+        .navigationBarBackButtonHidden()
+        .alert("\(winner.name) has won?", isPresented: $someoneWon) {
+            Button("Yes") {
+                recordWinner(players: viewModel.playersSelected, winner: winner, withDeck: winnerDeck)
+            }
+            Button("No", role: .destructive) {
                 
-                Button("No", role: .cancel) {}
-            })
-            .onAppear {
-                viewModel.gameStarted = true
             }
+        }
+        .alert("Are you sure you want to end this game?", isPresented: $goBackAlert, actions: {
+            Button("Yes") {
+                viewModel.gameStarted = false
+            }
+            
+            Button("No", role: .cancel) {}
+        })
+        .onAppear {
+            viewModel.gameStarted = true
         }
     }
     
-    func recordWinner(winner: Player, withDeck deck: Deck) {
+    func recordWinner(players: [Player: Deck], winner: Player, withDeck deck: Deck) {
         var playersID: [UUID] = []
         var decksID: [UUID] = []
         

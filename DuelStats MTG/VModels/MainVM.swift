@@ -13,6 +13,7 @@ class MainVM: ObservableObject {
     var currentLife: [Player: Int] = [:]
     var changeLife: Bool = false
     var changePlayersNumbers: Bool = false
+    var backgroundImage: UIImage = .bg2
     
     var gameStarted: Bool = false
     
@@ -47,7 +48,7 @@ class MainVM: ObservableObject {
     }
     
     func isInputValid(name: String, deck: String, format: Format) -> Bool {
-        return !name.isEmpty && !deck.isEmpty && !format.rawValue.isEmpty
+        return !name.isEmpty
     }
     
     func isDeckSelected(player: Player, deck: Deck) -> Bool {

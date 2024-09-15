@@ -15,6 +15,8 @@ struct DuelStats_MTGApp: App {
     let modelContainer: ModelContainer
     
     init() {
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = .black
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = .black
             do {
                 modelContainer = try ModelContainer(for: ContainerModel.self)
             } catch {

@@ -31,6 +31,7 @@ struct InfoPopUp: View {
                 Text("Ok")
                     .frame(width: 150)
                     .bold()
+                    .foregroundStyle(.black)
             }
             .buttonStyle(.borderedProminent)
         }

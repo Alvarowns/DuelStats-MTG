@@ -10,3 +10,5 @@ import Foundation
 enum Format: String, CaseIterable {
     case modern, standard, commander, casual, pauper, legacy, vintage
 }
+
+
