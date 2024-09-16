@@ -20,6 +20,8 @@
 		C7419C0F2C905309006BA8AE /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7419C0D2C905309006BA8AE /* PlayerModel.swift */; };
 		C7419C112C9053A1006BA8AE /* MainVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7419C102C9053A1006BA8AE /* MainVM.swift */; };
 		C7419C132C90573E006BA8AE /* PlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7419C122C90573E006BA8AE /* PlayersView.swift */; };
+		C7A11E742C981CED00C8990D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A11E732C981CED00C8990D /* MenuView.swift */; };
+		C7A11E762C98A1D500C8990D /* WinnerPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A11E752C98A1D500C8990D /* WinnerPopUp.swift */; };
 		C7A74FCF2C90663C00DE2D4E /* ContainerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A74FCE2C90663C00DE2D4E /* ContainerModel.swift */; };
 		C7A74FD12C90A29300DE2D4E /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A74FD02C90A29300DE2D4E /* Enums.swift */; };
 		C7A74FD32C90B25C00DE2D4E /* AddPlayerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A74FD22C90B25C00DE2D4E /* AddPlayerSheet.swift */; };
@@ -53,6 +55,8 @@
 		C7419C0D2C905309006BA8AE /* PlayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
 		C7419C102C9053A1006BA8AE /* MainVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVM.swift; sourceTree = "<group>"; };
 		C7419C122C90573E006BA8AE /* PlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersView.swift; sourceTree = "<group>"; };
+		C7A11E732C981CED00C8990D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		C7A11E752C98A1D500C8990D /* WinnerPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerPopUp.swift; sourceTree = "<group>"; };
 		C7A74FCE2C90663C00DE2D4E /* ContainerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerModel.swift; sourceTree = "<group>"; };
 		C7A74FD02C90A29300DE2D4E /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		C7A74FD22C90B25C00DE2D4E /* AddPlayerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerSheet.swift; sourceTree = "<group>"; };
@@ -185,7 +189,9 @@
 				C7A74FD22C90B25C00DE2D4E /* AddPlayerSheet.swift */,
 				C7A74FDA2C91939F00DE2D4E /* AddDeckSheet.swift */,
 				C719EEFB2C93637C00C9177A /* InfoPopUp.swift */,
+				C7A11E752C98A1D500C8990D /* WinnerPopUp.swift */,
 				C720EE772C973E07006F3A5C /* PlayerView.swift */,
+				C7A11E732C981CED00C8990D /* MenuView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -281,9 +287,11 @@
 				C7F7F2352C949B8900E6DB0E /* Network.swift in Sources */,
 				C7A74FD12C90A29300DE2D4E /* Enums.swift in Sources */,
 				C7A74FDF2C91F7BF00DE2D4E /* MatchesPlayedView.swift in Sources */,
+				C7A11E742C981CED00C8990D /* MenuView.swift in Sources */,
 				C720EE7A2C97473B006F3A5C /* PrepareDecksView.swift in Sources */,
 				C720EE742C95FD18006F3A5C /* Extensions.swift in Sources */,
 				C7F7F22A2C9498A700E6DB0E /* PlayerProfile.swift in Sources */,
+				C7A11E762C98A1D500C8990D /* WinnerPopUp.swift in Sources */,
 				C7419BFA2C9052A7006BA8AE /* DuelStats_MTGApp.swift in Sources */,
 				C71813592C920DFA00788C2B /* TabBarView.swift in Sources */,
 				C7A74FDD2C91BBC200DE2D4E /* DecksInkeeperList.swift in Sources */,

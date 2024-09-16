@@ -10,6 +10,7 @@ import SwiftUI
 extension View {
     public func shadowPop() -> some View {
         self
+            .shadow(radius: 2)
             .shadow(radius: 0.5)
             .shadow(radius: 0.5)
             .shadow(radius: 0.5)

@@ -10,6 +10,7 @@ import SwiftUI
 @Observable
 class MainVM: ObservableObject {
     var startingLife: Int = 20
+    var restartLifes: Bool = false
     var currentLife: [Player: Int] = [:]
     var changeLife: Bool = false
     var changePlayersNumbers: Bool = false

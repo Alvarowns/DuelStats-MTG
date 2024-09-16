@@ -31,63 +31,74 @@ struct MatchesPlayedView: View {
         return matches
     }
     
+    var groupedMatchesByDate: [Date: [SingleMatch]] {
+            Dictionary(grouping: filteredSearch) { match in
+                Calendar.current.startOfDay(for: match.date)
+            }
+        }
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 VStack {
                     List {
-                        ForEach(filteredSearch, id: \.self) { match in
-                                VStack(alignment: .leading) {
-                                    Text("\(match.date.formatted())")
-                                        .font(.headline)
-                                        .foregroundStyle(.white)
-                                    
-                                    ForEach(players.filter({ player in match.playersID.contains(player.id) }) , id: \.self) { player in
-                                        
-                                        HStack {
-                                            Image(systemName: "crown.fill")
-                                                .foregroundStyle(.yellow)
-                                                .opacity(player.id == match.winnerID ? 1.0 : 0.0)
-                                                .font(.footnote)
-                                            
-                                            Text(player.name)
-                                                .font(.subheadline)
-                                                .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
-                                            
-                                            Spacer()
-                                            
-                                            if let deck = player.decks.first(where: { deck in
-                                                match.decksID.contains(deck.id)
-                                            }) {
+                        ForEach(groupedMatchesByDate.keys.sorted(by: >), id: \.self) { date in
+                            Section {
+                                ForEach(filteredSearch, id: \.self) { match in
+                                        VStack(alignment: .leading) {
+                                            ForEach(players.filter({ player in match.playersID.contains(player.id) }) , id: \.self) { player in
+                                                
                                                 HStack {
-                                                    Text(deck.name)
-                                                    Text("(\(deck.format.capitalized))")
-                                                        .foregroundStyle(.secondary)
+                                                    Image(systemName: "crown.fill")
+                                                        .foregroundStyle(.yellow)
+                                                        .opacity(player.id == match.winnerID ? 1.0 : 0.0)
                                                         .font(.footnote)
+                                                    
+                                                    Text(player.name)
+                                                        .font(.subheadline)
+                                                        .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
+                                                    
+                                                    Spacer()
+                                                    
+                                                    if let deck = player.decks.first(where: { deck in
+                                                        match.decksID.contains(deck.id)
+                                                    }) {
+                                                        HStack {
+                                                            Text(deck.name)
+                                                            Text("(\(deck.format.capitalized))")
+                                                                .foregroundStyle(.secondary)
+                                                                .font(.footnote)
+                                                        }
+                                                        .font(.subheadline)
+                                                        .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
+                                                    }
                                                 }
-                                                .font(.subheadline)
-                                                .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
                                             }
-                                        }
                                     }
+                                }
+                                .onDelete(perform: deleteMatch(_:))
+                                .listRowBackground(
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .foregroundStyle(.black.opacity(0.6))
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .stroke(lineWidth: 3)
+                                            .foregroundStyle(.black)
+                                    }
+                                )
+                            } header: {
+                                Text("\(date.formatted(date: .abbreviated, time: .omitted))")
+                                    .foregroundStyle(.white)
                             }
+                            .shadowPop()
                         }
-                        .onDelete(perform: deleteMatch(_:))
-                        .listRowBackground(
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .foregroundStyle(.black.opacity(0.6))
-                                RoundedRectangle(cornerRadius: 16)
-                                    .stroke(lineWidth: 3)
-                                    .foregroundStyle(.black)
-                            }
-                        )
                     }
                     .listStyle(.plain)
                     .scrollIndicators(.never)
                     .disabled(showInfo ? true: false)
                     .blur(radius: showInfo ? 3 : 0)
                 }
+                .padding()
                 .background {
                     Image(uiImage: viewModel.backgroundImage)
                         .resizable()
