@@ -110,7 +110,7 @@ struct PrepareMatch: View {
                         }
                     }
                     .navigationDestination(isPresented: $goToDecks) {
-                        PrepareDecksView(players: players)
+                        PrepareDecksView(players: playersSelected)
                     }
                 }
             }
