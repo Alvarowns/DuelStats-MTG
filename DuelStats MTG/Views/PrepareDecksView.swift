@@ -10,7 +10,7 @@ import SwiftUI
 struct PrepareDecksView: View {
     @EnvironmentObject private var viewModel: MainVM
     
-    @State private var decksSelected: [Deck] = []
+    @State private var selecteds: [Player: Deck] = [:]
     
     let players: [Player]
     
@@ -19,23 +19,19 @@ struct PrepareDecksView: View {
             List {
                 ForEach(players, id: \.self) { player in
                         Section {
-                            ForEach(player.decks, id: \.self) { deck in
+                            ForEach(player.decks.filter({ $0.hasBeenDeleted == false }), id: \.self) { deck in
                                 HStack {
                                     Text(deck.name)
                                     
                                     Spacer()
                                     
-                                    Image(systemName: decksSelected.contains(deck) ? "circlebadge.fill" : "circlebadge")
+                                    Image(systemName: selecteds[player] == deck ? "circlebadge.fill" : "circlebadge")
                                         .font(.title)
                                         .foregroundStyle(.orange)
                                 }
                                 .contentShape(Rectangle())
                                 .onTapGesture {
-                                    if !decksSelected.contains(deck) {
-                                        decksSelected.append(deck)
-                                    } else {
-                                        decksSelected.removeAll { $0 == deck }
-                                    }
+                                    selecteds.updateValue(deck, forKey: player)
                                 }
                             }
                         } header: {
@@ -67,7 +63,7 @@ struct PrepareDecksView: View {
                     .shadowPop()
                 
                 Button {
-                    addDecksToPlayers()
+                    viewModel.playersSelected = selecteds
                     print(viewModel.playersSelected)
                     viewModel.gameStarted.toggle()
                 } label: {
@@ -78,7 +74,7 @@ struct PrepareDecksView: View {
                         .frame(maxWidth: .infinity)
                         .foregroundStyle(.black)
                 }
-                .disabled(decksSelected.count < players.count ? true : false)
+                .disabled(selecteds.count < players.count ? true : false)
                 .buttonStyle(.borderedProminent)
                 .shadowPop()
                 .padding()
@@ -90,19 +86,5 @@ struct PrepareDecksView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
         }
-    }
-    
-    func addDecksToPlayers() {
-        var playersAndDecks: [Player: Deck] = [:]
-        
-        for player in players {
-            for deck in decksSelected {
-                if player.decks.contains(deck) {
-                    playersAndDecks.updateValue(deck, forKey: player)
-                }
-            }
-        }
-        
-        viewModel.playersSelected = playersAndDecks
     }
 }

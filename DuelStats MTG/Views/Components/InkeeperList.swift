@@ -82,9 +82,7 @@ struct InkeeperList: View {
                         .padding()
                         .listStyle(.plain)
                         .navigationDestination(for: Player.self) { player in
-                            Text(player.name)
-                            Text(player.decks.first?.name ?? "")
-//                            PlayerProfile(player: player)
+                            PlayerProfile(player: player)
                         }
                     }
                 }

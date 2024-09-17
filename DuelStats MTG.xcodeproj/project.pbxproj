@@ -27,9 +27,11 @@
 		C7A74FD32C90B25C00DE2D4E /* AddPlayerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A74FD22C90B25C00DE2D4E /* AddPlayerSheet.swift */; };
 		C7A74FD52C90CD9500DE2D4E /* InkeeperList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A74FD42C90CD9500DE2D4E /* InkeeperList.swift */; };
 		C7A74FDB2C91939F00DE2D4E /* AddDeckSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A74FDA2C91939F00DE2D4E /* AddDeckSheet.swift */; };
-		C7A74FDD2C91BBC200DE2D4E /* DecksInkeeperList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A74FDC2C91BBC200DE2D4E /* DecksInkeeperList.swift */; };
 		C7A74FDF2C91F7BF00DE2D4E /* MatchesPlayedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A74FDE2C91F7BF00DE2D4E /* MatchesPlayedView.swift */; };
 		C7A74FE32C91FF2800DE2D4E /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A74FE22C91FF2800DE2D4E /* MatchView.swift */; };
+		C7A908D92C998E8F00AED0F7 /* EditDeckPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A908D82C998E8F00AED0F7 /* EditDeckPopUp.swift */; };
+		C7A908DE2C99971200AED0F7 /* DecksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A908DD2C99971200AED0F7 /* DecksList.swift */; };
+		C7A908E02C99A21000AED0F7 /* DeletedDecksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A908DF2C99A21000AED0F7 /* DeletedDecksView.swift */; };
 		C7F7F22A2C9498A700E6DB0E /* PlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F7F2292C9498A700E6DB0E /* PlayerProfile.swift */; };
 		C7F7F22C2C94998B00E6DB0E /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F7F22B2C94998B00E6DB0E /* Cards.swift */; };
 		C7F7F2352C949B8900E6DB0E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F7F22F2C949B8900E6DB0E /* Network.swift */; };
@@ -62,9 +64,11 @@
 		C7A74FD22C90B25C00DE2D4E /* AddPlayerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerSheet.swift; sourceTree = "<group>"; };
 		C7A74FD42C90CD9500DE2D4E /* InkeeperList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkeeperList.swift; sourceTree = "<group>"; };
 		C7A74FDA2C91939F00DE2D4E /* AddDeckSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeckSheet.swift; sourceTree = "<group>"; };
-		C7A74FDC2C91BBC200DE2D4E /* DecksInkeeperList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksInkeeperList.swift; sourceTree = "<group>"; };
 		C7A74FDE2C91F7BF00DE2D4E /* MatchesPlayedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesPlayedView.swift; sourceTree = "<group>"; };
 		C7A74FE22C91FF2800DE2D4E /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
+		C7A908D82C998E8F00AED0F7 /* EditDeckPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDeckPopUp.swift; sourceTree = "<group>"; };
+		C7A908DD2C99971200AED0F7 /* DecksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksList.swift; sourceTree = "<group>"; };
+		C7A908DF2C99A21000AED0F7 /* DeletedDecksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedDecksView.swift; sourceTree = "<group>"; };
 		C7F7F2292C9498A700E6DB0E /* PlayerProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProfile.swift; sourceTree = "<group>"; };
 		C7F7F22B2C94998B00E6DB0E /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 		C7F7F22F2C949B8900E6DB0E /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -139,7 +143,6 @@
 				C71813582C920DFA00788C2B /* TabBarView.swift */,
 				C7A74FDE2C91F7BF00DE2D4E /* MatchesPlayedView.swift */,
 				C7419C122C90573E006BA8AE /* PlayersView.swift */,
-				C7F7F2292C9498A700E6DB0E /* PlayerProfile.swift */,
 				C720EE752C9605A5006F3A5C /* PrepareMatch.swift */,
 				C720EE792C97473B006F3A5C /* PrepareDecksView.swift */,
 				C7A74FE22C91FF2800DE2D4E /* MatchView.swift */,
@@ -185,15 +188,42 @@
 			isa = PBXGroup;
 			children = (
 				C7A74FD42C90CD9500DE2D4E /* InkeeperList.swift */,
-				C7A74FDC2C91BBC200DE2D4E /* DecksInkeeperList.swift */,
-				C7A74FD22C90B25C00DE2D4E /* AddPlayerSheet.swift */,
-				C7A74FDA2C91939F00DE2D4E /* AddDeckSheet.swift */,
-				C719EEFB2C93637C00C9177A /* InfoPopUp.swift */,
-				C7A11E752C98A1D500C8990D /* WinnerPopUp.swift */,
-				C720EE772C973E07006F3A5C /* PlayerView.swift */,
 				C7A11E732C981CED00C8990D /* MenuView.swift */,
+				C720EE772C973E07006F3A5C /* PlayerView.swift */,
+				C7A908DC2C9996E800AED0F7 /* PopUps */,
+				C7A908DB2C9996DF00AED0F7 /* Sheets */,
+				C7A908DA2C9996DA00AED0F7 /* Profile */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		C7A908DA2C9996DA00AED0F7 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				C7F7F2292C9498A700E6DB0E /* PlayerProfile.swift */,
+				C7A908DD2C99971200AED0F7 /* DecksList.swift */,
+				C7A908DF2C99A21000AED0F7 /* DeletedDecksView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		C7A908DB2C9996DF00AED0F7 /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				C7A74FD22C90B25C00DE2D4E /* AddPlayerSheet.swift */,
+				C7A74FDA2C91939F00DE2D4E /* AddDeckSheet.swift */,
+			);
+			path = Sheets;
+			sourceTree = "<group>";
+		};
+		C7A908DC2C9996E800AED0F7 /* PopUps */ = {
+			isa = PBXGroup;
+			children = (
+				C7A908D82C998E8F00AED0F7 /* EditDeckPopUp.swift */,
+				C719EEFB2C93637C00C9177A /* InfoPopUp.swift */,
+				C7A11E752C98A1D500C8990D /* WinnerPopUp.swift */,
+			);
+			path = PopUps;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7A908E02C99A21000AED0F7 /* DeletedDecksView.swift in Sources */,
 				C7419C132C90573E006BA8AE /* PlayersView.swift in Sources */,
 				C7A74FE32C91FF2800DE2D4E /* MatchView.swift in Sources */,
 				C7F7F2392C949B8900E6DB0E /* NetworkError.swift in Sources */,
@@ -287,6 +318,8 @@
 				C7F7F2352C949B8900E6DB0E /* Network.swift in Sources */,
 				C7A74FD12C90A29300DE2D4E /* Enums.swift in Sources */,
 				C7A74FDF2C91F7BF00DE2D4E /* MatchesPlayedView.swift in Sources */,
+				C7A908D92C998E8F00AED0F7 /* EditDeckPopUp.swift in Sources */,
+				C7A908DE2C99971200AED0F7 /* DecksList.swift in Sources */,
 				C7A11E742C981CED00C8990D /* MenuView.swift in Sources */,
 				C720EE7A2C97473B006F3A5C /* PrepareDecksView.swift in Sources */,
 				C720EE742C95FD18006F3A5C /* Extensions.swift in Sources */,
@@ -294,7 +327,6 @@
 				C7A11E762C98A1D500C8990D /* WinnerPopUp.swift in Sources */,
 				C7419BFA2C9052A7006BA8AE /* DuelStats_MTGApp.swift in Sources */,
 				C71813592C920DFA00788C2B /* TabBarView.swift in Sources */,
-				C7A74FDD2C91BBC200DE2D4E /* DecksInkeeperList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -41,6 +41,7 @@ struct WinnerPopUp: View {
                 
                 Button {
                     recordWinner(players: viewModel.playersSelected, winner: winner, withDeck: deck)
+                    viewModel.playersSelected = [:]
                     viewModel.gameStarted = false
                 } label: {
                     Text("Yes!")

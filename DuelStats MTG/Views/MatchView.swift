@@ -13,7 +13,7 @@ struct MatchView: View {
     
     @State private var someoneWon: Bool = false
     @State private var winner: Player = Player(name: "", decks: [], favorite: false, matches: [])
-    @State private var winnerDeck: Deck = Deck(name: "", format: "")
+    @State private var winnerDeck: Deck = Deck(name: "", format: "", hasBeenDeleted: false)
     
     var body: some View {
         GeometryReader { geometry in

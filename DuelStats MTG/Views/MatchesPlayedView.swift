@@ -47,7 +47,6 @@ struct MatchesPlayedView: View {
                                 ForEach(filteredSearch, id: \.self) { match in
                                         VStack(alignment: .leading) {
                                             ForEach(players.filter({ player in match.playersID.contains(player.id) }) , id: \.self) { player in
-                                                
                                                 HStack {
                                                     Image(systemName: "crown.fill")
                                                         .foregroundStyle(.yellow)
@@ -60,19 +59,18 @@ struct MatchesPlayedView: View {
                                                     
                                                     Spacer()
                                                     
-                                                    if let deck = player.decks.first(where: { deck in
-                                                        match.decksID.contains(deck.id)
-                                                    }) {
-                                                        HStack {
-                                                            Text(deck.name)
-                                                            Text("(\(deck.format.capitalized))")
-                                                                .foregroundStyle(.secondary)
-                                                                .font(.footnote)
-                                                        }
-                                                        .font(.subheadline)
-                                                        .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
+                                                    ForEach(player.decks.filter({ deck in match.decksID.contains(deck.id) }), id: \.self) { deck in
+                                                            HStack {
+                                                                Text(deck.name)
+                                                                Text("(\(deck.format.capitalized))")
+                                                                    .foregroundStyle(.secondary)
+                                                                    .font(.footnote)
+                                                            }
+                                                            .font(.subheadline)
+                                                            .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
                                                     }
                                                 }
+                                                
                                             }
                                     }
                                 }

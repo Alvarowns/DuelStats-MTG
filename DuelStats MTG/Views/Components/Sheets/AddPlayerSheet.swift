@@ -1,31 +1,37 @@
 //
-//  AddDeckSheet.swift
+//  AddPlayerSheet.swift
 //  DuelStats MTG
 //
-//  Created by Alvaro Santos Orellana on 11/9/24.
+//  Created by Alvaro Santos Orellana on 10/9/24.
 //
 
 import SwiftUI
 
-struct AddDeckSheet: View {
+struct AddPlayerSheet: View {
     @EnvironmentObject private var viewModel: MainVM
     @Environment(\.modelContext) var modelContext
     
-    @State private var deckName: String = ""
-    @State private var format: Format = .casual
-    
+    @State var name: String = ""
+    @State var deckName: String = ""
+    @State var format: Format = .casual
     @Binding var sheet: Bool
-    
-    var player: Player
     
     var body: some View {
         VStack {
             Group {
+                Text("You can add more decks and edit them later!")
+                    .padding(.bottom)
+                
+                TextField("Player Name", text: $name)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                
                 TextField("Deck name", text: $deckName)
+                    .autocorrectionDisabled()
                     .textInputAutocapitalization(.words)
                     .onChange(of: deckName) {
-                                    if deckName.count > 12 {
-                                        deckName = String(deckName.prefix(12))
+                                    if deckName.count > 20 {
+                                        deckName = String(deckName.prefix(20))
                                     }
                                 }
             }
@@ -46,29 +52,27 @@ struct AddDeckSheet: View {
             
             Button {
                 sheet.toggle()
-                addDeck()
+                addPlayer()
+                name = ""
                 deckName = ""
                 format = .casual
             } label: {
-                Text("Add Deck")
+                Text("Add Player")
+                    .foregroundStyle(.black)
             }
+            .foregroundStyle(.black)
             .buttonStyle(.borderedProminent)
             .font(.headline)
-            .disabled(!isInputValid(deck: deckName, format: format))
+            .disabled(!viewModel.isInputValid(name: name, deck: deckName, format: format))
             
         }
         .padding()
         .presentationDetents([.fraction(1/4)])
-        .tint(.salmon)
+        .tint(.orange)
     }
     
-    func addDeck() {
-        let deck: Deck = Deck(name: deckName, format: format.rawValue)
-        player.decks.append(deck)
+    func addPlayer() {
+        let player: Player = Player(name: name, decks: [Deck(name: deckName, format: format.rawValue, hasBeenDeleted: false)], favorite: false, matches: [])
         modelContext.insert(player)
-    }
-    
-    func isInputValid( deck: String, format: Format) -> Bool {
-        return !deck.isEmpty && !format.rawValue.isEmpty
     }
 }
