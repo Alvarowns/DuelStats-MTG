@@ -18,13 +18,17 @@ struct PlayerView: View {
     @State private var showPoison: Bool = false
     @State private var timer: Timer?
     @State private var fondo: UIImage = .bgplayer2
+    @State private var color: Color = .swampColor1
     @State private var changeImage: Bool = false
+    @State private var isImage: Bool = true
     
     @Binding var someoneWon: Bool
     @Binding var playerWon: Player
     @Binding var deckWon: Deck
     
     let fondoNames: [String] = ["bgplayer1", "bgplayer2", "bgplayer3", "bgplayer6", "bgplayer7", "bgplayer8", "bgplayer9", "bgplayer10", "bgplayer11", "bgplayer12"]
+    
+    let colorNames: [Color] = [.bubblegum, .forest, .isle, .orchid, .salmon, .swamp, .swampColor1]
     
     let player: Player
     let deck: Deck
@@ -181,9 +185,13 @@ struct PlayerView: View {
                 Spacer()
             }
             .background {
-                Image(uiImage: fondo)
-                    .resizable()
-                    .scaledToFill()
+                if isImage {
+                    Image(uiImage: fondo)
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    color
+                }
             }
             .tint(.white)
             .foregroundStyle(.white)
@@ -196,24 +204,70 @@ struct PlayerView: View {
             }
             .blur(radius: changeImage ? 3.0 : 0.0)
             
-            ScrollView(.horizontal) {
+            VStack {
                 HStack {
-                    ForEach(fondoNames, id: \.self) { fondo in
-                        Image(fondo)
-                            .resizable()
-                            .scaledToFit()
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                            .frame(maxWidth: 200, maxHeight: 200)
-                            .onTapGesture {
-                                self.fondo = UIImage(imageLiteralResourceName: fondo)
-                                changeImage.toggle()
-                            }
+                    Button {
+                        isImage = true
+                    } label: {
+                        Image(systemName: "photo.stack.fill")
+                            .foregroundStyle(.black)
                     }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.orange)
+                    
+                    Button {
+                        isImage = false
+                    } label: {
+                        Image(systemName: "paintpalette.fill")
+                            .foregroundStyle(.black)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.orange)
                 }
-                .padding()
+                .padding(.top, 5)
+                
+                ZStack {
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(fondoNames, id: \.self) { fondo in
+                                Image(fondo)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                                    .frame(maxWidth: 200, maxHeight: 200)
+                                    .onTapGesture {
+                                        self.fondo = UIImage(imageLiteralResourceName: fondo)
+                                        changeImage.toggle()
+                                    }
+                                    .shadowPop()
+                            }
+                        }
+                        .padding()
+                    }
+                    .opacity(isImage ? 1.0 : 0.0)
+                    .scrollIndicators(.never)
+                    .safeAreaPadding(.horizontal)
+                    
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(colorNames, id: \.self) { color in
+                                color
+                                    .frame(width: 200, height: 200)
+                                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                                    .onTapGesture {
+                                        self.color = color
+                                        changeImage.toggle()
+                                    }
+                                    .shadowPop()
+                            }
+                        }
+                        .padding()
+                    }
+                    .opacity(isImage ? 0.0 : 1.0)
+                    .scrollIndicators(.never)
+                    .safeAreaPadding(.horizontal)
+                }
             }
-            .scrollIndicators(.never)
-            .safeAreaPadding(.horizontal)
             .background {
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundStyle(.black)
