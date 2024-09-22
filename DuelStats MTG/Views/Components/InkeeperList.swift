@@ -50,7 +50,7 @@ struct InkeeperList: View {
                                         HStack {
                                             Image(systemName: "star.fill")
                                                 .font(.title2)
-                                                .foregroundStyle(.yellow)
+                                                .foregroundStyle(.orange)
                                                 .opacity(player.favorite ? 1.0 : 0.0)
                                             
                                             

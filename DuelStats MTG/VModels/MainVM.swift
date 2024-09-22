@@ -9,6 +9,8 @@ import SwiftUI
 
 @Observable
 class MainVM: ObservableObject {
+    var appState: AppState = .startingView
+    
     var startingLife: Int = 20
     var restartLifes: Bool = false
     var currentLife: [Player: Int] = [:]

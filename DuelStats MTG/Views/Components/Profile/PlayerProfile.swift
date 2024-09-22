@@ -11,6 +11,7 @@ import SwiftData
 
 struct PlayerProfile: View {
     @EnvironmentObject private var viewModel: MainVM
+    @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
     @Query(sort: \SingleMatch.date, order: .reverse) var matches: [SingleMatch]
     @Query var players: [Player]
@@ -31,7 +32,8 @@ struct PlayerProfile: View {
     let player: Player
     
     var groupedMatchesByDate: [Date: [SingleMatch]] {
-        Dictionary(grouping: matches) { match in
+        let filteredMatches = matches.filter { $0.decksID.contains(deckSelected.id) }
+        return Dictionary(grouping: filteredMatches) { match in
             Calendar.current.startOfDay(for: match.date)
         }
     }
@@ -79,7 +81,7 @@ struct PlayerProfile: View {
                     Spacer()
                     
                     Text(deckSelected.name)
-                        .font(.title2)
+                        .font(.title)
                         .bold()
                     
                     Spacer()
@@ -149,63 +151,78 @@ struct PlayerProfile: View {
                             .bold()
                     }
                     .font(.footnote)
+                    .fontWeight(.semibold)
                     .shadowPop()
                 }
                 .onChange(of: deckSelected) {
                     updateWinRates()
                 }
                 
-                List {
-                    ForEach(groupedMatchesByDate.keys.sorted(by: >), id: \.self) { date in
-                        Section {
-                            ForEach(matches.filter { $0.decksID.contains(deckSelected.id) }, id: \.self) { match in
-                                VStack(alignment: .leading) {
-                                    ForEach(players.filter({ player in match.playersID.contains(player.id) }) , id: \.self) { player in
-                                        HStack {
-                                            Image(systemName: "crown.fill")
-                                                .foregroundStyle(.yellow)
-                                                .opacity(player.id == match.winnerID ? 1.0 : 0.0)
-                                                .font(.footnote)
-                                            
-                                            Text(player.name)
-                                                .font(.subheadline)
-                                                .foregroundStyle(player.id != match.winnerID && player.id == self.player.id ? .red : .secondary)
-                                            
-                                            Spacer()
-                                            
-                                            ForEach(player.decks.filter({ deck in match.decksID.contains(deck.id) }), id: \.self) { deck in
+                Section {
+                    Section {
+                        List {
+                            ForEach(groupedMatchesByDate.keys.sorted(by: >), id: \.self) { date in
+                                Section {
+                                    ForEach(groupedMatchesByDate[date] ?? [], id: \.self) { match in
+                                        VStack(alignment: .leading) {
+                                            ForEach(players.filter({ player in match.playersID.contains(player.id) }), id: \.self) { player in
                                                 HStack {
-                                                    Text(deck.name)
-                                                    Text("(\(deck.format.capitalized))")
-                                                        .foregroundStyle(.secondary)
+                                                    Image(systemName: "crown.fill")
+                                                        .foregroundStyle(.yellow)
+                                                        .opacity(player.id == match.winnerID ? 1.0 : 0.0)
                                                         .font(.footnote)
+                                                    
+                                                    Text(player.name)
+                                                        .font(.subheadline)
+                                                        .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
+                                                    
+                                                    Spacer()
+                                                    
+                                                    ForEach(player.decks.filter({ deck in match.decksID.contains(deck.id) }), id: \.self) { deck in
+                                                        HStack {
+                                                            Text(deck.name)
+                                                            Text("(\(deck.format.capitalized))")
+                                                                .foregroundStyle(.secondary)
+                                                                .font(.footnote)
+                                                        }
+                                                        .font(.subheadline)
+                                                        .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
+                                                    }
                                                 }
-                                                .font(.subheadline)
-                                                .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
                                             }
                                         }
-                                        
+                                        .padding(.vertical, 2)
+                                        .listRowBackground(
+                                            ZStack {
+                                                RoundedRectangle(cornerRadius: 16)
+                                                    .foregroundStyle(.black.opacity(0.6))
+                                                RoundedRectangle(cornerRadius: 16)
+                                                    .stroke(lineWidth: 3)
+                                                    .foregroundStyle(player.id == match.winnerID ? .green : .red)
+                                            }
+                                                .padding(.vertical, 2)
+                                                .shadowPop()
+                                        )
                                     }
+                                } header: {
+                                    Text("\(date.formatted(date: .abbreviated, time: .omitted))")
+                                        .foregroundStyle(.white)
                                 }
+                                .shadowPop()
                             }
-                            .listRowBackground(
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .foregroundStyle(.black.opacity(0.6))
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .stroke(lineWidth: 3)
-                                        .foregroundStyle(.black)
-                                }
-                            )
-                        } header: {
-                            Text("\(date.formatted(date: .abbreviated, time: .omitted))")
-                                .foregroundStyle(.white)
                         }
-                        .shadowPop()
+                        .listStyle(.plain)
+                        .scrollIndicators(.never)
                     }
+                    
+                } header: {
+                    Text("Latest Matches")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.title3)
+                        .bold()
+                        .shadowPop()
                 }
-                .listStyle(.plain)
-                .scrollIndicators(.never)
+                .padding(.horizontal)
             }
             .navigationDestination(isPresented: $showDeletedDecks, destination: {
                 DeletedDecksView(player: player)
@@ -223,6 +240,17 @@ struct PlayerProfile: View {
             .blur(radius: editDeck ? 3.0 : 0.0)
             .disabled(editDeck ? true : false)
             .navigationTitle(player.name)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        player.favorite.toggle()
+                    } label: {
+                        Image(systemName: player.favorite ? "star.fill" : "star")
+                            .foregroundStyle(.orange)
+                            .font(.title3)
+                    }
+                }
+            }
             .background {
                 Image(uiImage: viewModel.backgroundImage)
                     .resizable()
@@ -264,11 +292,10 @@ struct PlayerProfile: View {
     }
     
     func updateWinRates() {
-        let dataPoints = winRatesData(for: deckSelected)
-        deckMatches = dataPoints.last?.matchNumber ?? 0
-        deckWins = dataPoints.filter { $0.winRate == 100 }.count
+        deckMatches = matches.filter { $0.decksID.contains(deckSelected.id) }.count
+        deckWins = matches.filter { $0.winnerDeckID == deckSelected.id }.count
         deckLoses = deckMatches - deckWins
-        lastWinRate = dataPoints.last?.winRate ?? 0.0
+        lastWinRate = deckMatches > 0 ? (Double(deckWins) / Double(deckMatches)) * 100.0 : 0.0
     }
     
     struct WinRateDataPoint {

@@ -15,27 +15,27 @@ struct MatchesPlayedView: View {
     @Query var players: [Player]
     
     @State private var showInfo: Bool = false
+    @State private var settings: Bool = false
     @State private var search: String = ""
     
     var filteredSearch: [SingleMatch] {
         if !search.isEmpty {
             let lowercasedSearch = search.lowercased()
-                return matches.filter { match in
-                    match.playersID.contains { id in
-                        guard let player = players.first(where: { $0.id == id }) else { return false }
-                        return player.name.lowercased().contains(lowercasedSearch)
-                    }
+            return matches.filter { match in
+                match.playersID.contains { id in
+                    guard let player = players.first(where: { $0.id == id }) else { return false }
+                    return player.name.lowercased().contains(lowercasedSearch)
                 }
+            }
         }
-        
         return matches
     }
     
     var groupedMatchesByDate: [Date: [SingleMatch]] {
-            Dictionary(grouping: filteredSearch) { match in
-                Calendar.current.startOfDay(for: match.date)
-            }
+        Dictionary(grouping: filteredSearch) { match in
+            Calendar.current.startOfDay(for: match.date)
         }
+    }
     
     var body: some View {
         NavigationStack {
@@ -44,34 +44,33 @@ struct MatchesPlayedView: View {
                     List {
                         ForEach(groupedMatchesByDate.keys.sorted(by: >), id: \.self) { date in
                             Section {
-                                ForEach(filteredSearch, id: \.self) { match in
-                                        VStack(alignment: .leading) {
-                                            ForEach(players.filter({ player in match.playersID.contains(player.id) }) , id: \.self) { player in
-                                                HStack {
-                                                    Image(systemName: "crown.fill")
-                                                        .foregroundStyle(.yellow)
-                                                        .opacity(player.id == match.winnerID ? 1.0 : 0.0)
-                                                        .font(.footnote)
-                                                    
-                                                    Text(player.name)
-                                                        .font(.subheadline)
-                                                        .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
-                                                    
-                                                    Spacer()
-                                                    
-                                                    ForEach(player.decks.filter({ deck in match.decksID.contains(deck.id) }), id: \.self) { deck in
-                                                            HStack {
-                                                                Text(deck.name)
-                                                                Text("(\(deck.format.capitalized))")
-                                                                    .foregroundStyle(.secondary)
-                                                                    .font(.footnote)
-                                                            }
-                                                            .font(.subheadline)
-                                                            .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
-                                                    }
-                                                }
+                                ForEach(groupedMatchesByDate[date] ?? [], id: \.self) { match in
+                                    VStack(alignment: .leading) {
+                                        ForEach(players.filter({ player in match.playersID.contains(player.id) }), id: \.self) { player in
+                                            HStack {
+                                                Image(systemName: "crown.fill")
+                                                    .foregroundStyle(.yellow)
+                                                    .opacity(player.id == match.winnerID ? 1.0 : 0.0)
+                                                    .font(.footnote)
                                                 
+                                                Text(player.name)
+                                                    .font(.subheadline)
+                                                    .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
+                                                
+                                                Spacer()
+                                                
+                                                ForEach(player.decks.filter({ deck in match.decksID.contains(deck.id) }), id: \.self) { deck in
+                                                    HStack {
+                                                        Text(deck.name)
+                                                        Text("(\(deck.format.capitalized))")
+                                                            .foregroundStyle(.secondary)
+                                                            .font(.footnote)
+                                                    }
+                                                    .font(.subheadline)
+                                                    .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
+                                                }
                                             }
+                                        }
                                     }
                                 }
                                 .onDelete(perform: deleteMatch(_:))
@@ -107,24 +106,36 @@ struct MatchesPlayedView: View {
                 InfoPopUp(showInfo: $showInfo, title: "You can swipe left to delete any match", subtitle: "Be careful, this action will remove the match permanently!", message: "")
             }
             .searchable(text: $search, prompt: "Search for a player")
+            .fullScreenCover(isPresented: $settings) {
+                Settings()
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                Text("Matches")
-                    .font(.largeTitle)
-                    .foregroundStyle(.white)
-                    .shadow(radius: 1)
-                    .shadow(radius: 1)
-                    .bold()
-            }
+                    Text("Matches")
+                        .font(.largeTitle)
+                        .foregroundStyle(.white)
+                        .shadowPop()
+                        .bold()
+                }
+                
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showInfo.toggle()
-                    } label: {
-                        Image(systemName: "info.circle")
-                            .bold()
+                    HStack {
+                        Button {
+                            showInfo.toggle()
+                        } label: {
+                            Image(systemName: "info.circle")
+                                .bold()
+                        }
+                        .shadowPop()
+                        
+                        Button {
+                            settings.toggle()
+                        } label: {
+                            Image(systemName: "gearshape")
+                                .bold()
+                        }
+                        .shadowPop()
                     }
-                    .shadow(radius: 1)
-                    .shadow(radius: 1)
                 }
             }
         }
@@ -137,3 +148,4 @@ struct MatchesPlayedView: View {
         }
     }
 }
+

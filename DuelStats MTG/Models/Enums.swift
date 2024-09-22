@@ -11,4 +11,8 @@ enum Format: String, CaseIterable {
     case modern, standard, commander, casual, pauper, legacy, vintage
 }
 
+enum AppState {
+    case splash, startingView, tabBar
+}
+
 

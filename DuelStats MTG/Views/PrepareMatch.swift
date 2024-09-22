@@ -15,6 +15,7 @@ struct PrepareMatch: View {
     @State private var search: String = ""
     @State private var playersSelected: [Player] = []
     @State private var goToDecks: Bool = false
+    @State private var settings: Bool = false
     
     var filteredSearch: [Player] {
         if !search.isEmpty {
@@ -120,6 +121,9 @@ struct PrepareMatch: View {
                     .scaledToFill()
                     .ignoresSafeArea()
             }
+            .fullScreenCover(isPresented: $settings) {
+                Settings()
+            }
             .searchable(text: $search, prompt: "Search for a player")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -128,6 +132,16 @@ struct PrepareMatch: View {
                         .foregroundStyle(.white)
                         .bold()
                         .shadowPop()
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        settings.toggle()
+                    } label: {
+                        Image(systemName: "gearshape")
+                            .bold()
+                    }
+                    .shadowPop()
                 }
             }
         }

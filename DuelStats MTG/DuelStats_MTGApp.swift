@@ -26,7 +26,7 @@ struct DuelStats_MTGApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TabBarView()
+            AppStateView()
                 .preferredColorScheme(.dark)
         }
         .environmentObject(MainVM())

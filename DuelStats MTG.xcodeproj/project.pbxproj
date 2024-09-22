@@ -32,6 +32,9 @@
 		C7A908D92C998E8F00AED0F7 /* EditDeckPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A908D82C998E8F00AED0F7 /* EditDeckPopUp.swift */; };
 		C7A908DE2C99971200AED0F7 /* DecksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A908DD2C99971200AED0F7 /* DecksList.swift */; };
 		C7A908E02C99A21000AED0F7 /* DeletedDecksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A908DF2C99A21000AED0F7 /* DeletedDecksView.swift */; };
+		C7CE516A2CA01C1500E79301 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE51692CA01C1500E79301 /* MainView.swift */; };
+		C7CE516C2CA0260B00E79301 /* AppStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE516B2CA0260B00E79301 /* AppStateView.swift */; };
+		C7CE516E2CA0376700E79301 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE516D2CA0376700E79301 /* Settings.swift */; };
 		C7F7F22A2C9498A700E6DB0E /* PlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F7F2292C9498A700E6DB0E /* PlayerProfile.swift */; };
 		C7F7F22C2C94998B00E6DB0E /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F7F22B2C94998B00E6DB0E /* Cards.swift */; };
 		C7F7F2352C949B8900E6DB0E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F7F22F2C949B8900E6DB0E /* Network.swift */; };
@@ -69,6 +72,9 @@
 		C7A908D82C998E8F00AED0F7 /* EditDeckPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDeckPopUp.swift; sourceTree = "<group>"; };
 		C7A908DD2C99971200AED0F7 /* DecksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksList.swift; sourceTree = "<group>"; };
 		C7A908DF2C99A21000AED0F7 /* DeletedDecksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedDecksView.swift; sourceTree = "<group>"; };
+		C7CE51692CA01C1500E79301 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		C7CE516B2CA0260B00E79301 /* AppStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateView.swift; sourceTree = "<group>"; };
+		C7CE516D2CA0376700E79301 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C7F7F2292C9498A700E6DB0E /* PlayerProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProfile.swift; sourceTree = "<group>"; };
 		C7F7F22B2C94998B00E6DB0E /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 		C7F7F22F2C949B8900E6DB0E /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -140,6 +146,8 @@
 		C7419C072C9052B3006BA8AE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C7CE516B2CA0260B00E79301 /* AppStateView.swift */,
+				C7CE51692CA01C1500E79301 /* MainView.swift */,
 				C71813582C920DFA00788C2B /* TabBarView.swift */,
 				C7A74FDE2C91F7BF00DE2D4E /* MatchesPlayedView.swift */,
 				C7419C122C90573E006BA8AE /* PlayersView.swift */,
@@ -212,6 +220,7 @@
 			children = (
 				C7A74FD22C90B25C00DE2D4E /* AddPlayerSheet.swift */,
 				C7A74FDA2C91939F00DE2D4E /* AddDeckSheet.swift */,
+				C7CE516D2CA0376700E79301 /* Settings.swift */,
 			);
 			path = Sheets;
 			sourceTree = "<group>";
@@ -305,7 +314,9 @@
 				C7A74FDB2C91939F00DE2D4E /* AddDeckSheet.swift in Sources */,
 				C7A74FCF2C90663C00DE2D4E /* ContainerModel.swift in Sources */,
 				C720EE782C973E07006F3A5C /* PlayerView.swift in Sources */,
+				C7CE516A2CA01C1500E79301 /* MainView.swift in Sources */,
 				C7419C112C9053A1006BA8AE /* MainVM.swift in Sources */,
+				C7CE516C2CA0260B00E79301 /* AppStateView.swift in Sources */,
 				C7419C0E2C905309006BA8AE /* Matches.swift in Sources */,
 				C7419C0F2C905309006BA8AE /* PlayerModel.swift in Sources */,
 				C7A74FD52C90CD9500DE2D4E /* InkeeperList.swift in Sources */,
@@ -314,6 +325,7 @@
 				C720EE762C9605A5006F3A5C /* PrepareMatch.swift in Sources */,
 				C719EEFC2C93637C00C9177A /* InfoPopUp.swift in Sources */,
 				C7F7F23A2C949B8900E6DB0E /* URLRequest.swift in Sources */,
+				C7CE516E2CA0376700E79301 /* Settings.swift in Sources */,
 				C7F7F2372C949B8900E6DB0E /* NetworkStatus.swift in Sources */,
 				C7F7F2352C949B8900E6DB0E /* Network.swift in Sources */,
 				C7A74FD12C90A29300DE2D4E /* Enums.swift in Sources */,
