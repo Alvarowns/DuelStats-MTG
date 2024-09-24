@@ -42,59 +42,75 @@ struct MatchesPlayedView: View {
         NavigationStack {
             ZStack {
                 VStack {
-                    List {
-                        ForEach(groupedMatchesByDate.keys.sorted(by: >), id: \.self) { date in
-                            Section {
-                                ForEach(groupedMatchesByDate[date] ?? [], id: \.self) { match in
-                                    VStack(alignment: .leading) {
-                                        ForEach(players.filter({ player in match.playersID.contains(player.id) }), id: \.self) { player in
-                                            HStack {
-                                                Image(systemName: "crown.fill")
-                                                    .foregroundStyle(.yellow)
-                                                    .opacity(player.id == match.winnerID ? 1.0 : 0.0)
-                                                    .font(.footnote)
-                                                
-                                                Text(player.name)
-                                                    .font(.subheadline)
-                                                    .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
-                                                
-                                                Spacer()
-                                                
-                                                ForEach(player.decks.filter({ deck in match.decksID.contains(deck.id) }), id: \.self) { deck in
-                                                    HStack {
-                                                        Text(deck.name)
-                                                        Text("(\(deck.format.capitalized))")
-                                                            .foregroundStyle(.secondary)
-                                                            .font(.footnote)
+                    if groupedMatchesByDate.isEmpty {
+                        ContentUnavailableView(
+                            "There are no matches yet",
+                            systemImage: "rectangle.portrait.on.rectangle.portrait.slash.fill",
+                            description: Text("Start a game!").foregroundStyle(.white)
+                        )
+                        .shadowPop()
+                    } else if filteredSearch.isEmpty {
+                        ContentUnavailableView(
+                            "There are no matches with that player",
+                            systemImage: "person.slash.fill",
+                            description: Text("Try with another name!").foregroundStyle(.white)
+                        )
+                        .shadowPop()
+                    } else {
+                        List {
+                            ForEach(groupedMatchesByDate.keys.sorted(by: >), id: \.self) { date in
+                                Section {
+                                    ForEach(groupedMatchesByDate[date] ?? [], id: \.self) { match in
+                                        VStack(alignment: .leading) {
+                                            ForEach(players.filter({ player in match.playersID.contains(player.id) }), id: \.self) { player in
+                                                HStack {
+                                                    Image(systemName: "crown.fill")
+                                                        .foregroundStyle(.yellow)
+                                                        .opacity(player.id == match.winnerID ? 1.0 : 0.0)
+                                                        .font(.footnote)
+                                                    
+                                                    Text(player.name)
+                                                        .font(.subheadline)
+                                                        .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
+                                                    
+                                                    Spacer()
+                                                    
+                                                    ForEach(player.decks.filter({ deck in match.decksID.contains(deck.id) }), id: \.self) { deck in
+                                                        HStack {
+                                                            Text(deck.name)
+                                                            Text("(\(deck.format.capitalized))")
+                                                                .foregroundStyle(.secondary)
+                                                                .font(.footnote)
+                                                        }
+                                                        .font(.subheadline)
+                                                        .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
                                                     }
-                                                    .font(.subheadline)
-                                                    .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
                                                 }
                                             }
                                         }
                                     }
+                                    .onDelete(perform: deleteMatch(_:))
+                                    .listRowBackground(
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .foregroundStyle(.black.opacity(0.6))
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .stroke(lineWidth: 3)
+                                                .foregroundStyle(.black)
+                                        }
+                                    )
+                                } header: {
+                                    Text("\(date.formatted(date: .abbreviated, time: .omitted))")
+                                        .foregroundStyle(.white)
                                 }
-                                .onDelete(perform: deleteMatch(_:))
-                                .listRowBackground(
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 16)
-                                            .foregroundStyle(.black.opacity(0.6))
-                                        RoundedRectangle(cornerRadius: 16)
-                                            .stroke(lineWidth: 3)
-                                            .foregroundStyle(.black)
-                                    }
-                                )
-                            } header: {
-                                Text("\(date.formatted(date: .abbreviated, time: .omitted))")
-                                    .foregroundStyle(.white)
+                                .shadowPop()
                             }
-                            .shadowPop()
                         }
+                        .listStyle(.plain)
+                        .scrollIndicators(.never)
+                        .disabled(showInfo ? true: false)
+                        .blur(radius: showInfo ? 3 : 0)
                     }
-                    .listStyle(.plain)
-                    .scrollIndicators(.never)
-                    .disabled(showInfo ? true: false)
-                    .blur(radius: showInfo ? 3 : 0)
                 }
                 .padding()
                 .background {

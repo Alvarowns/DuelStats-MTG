@@ -21,6 +21,7 @@ struct MainView: View {
                     settings.toggle()
                 } label: {
                     Image(systemName: "gearshape")
+                        .imageScale(.large)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
