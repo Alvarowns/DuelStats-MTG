@@ -116,113 +116,122 @@ struct PlayerProfile: View {
                 .padding(.horizontal)
                 .shadowPop()
                 
-                Section {
-                    Chart {
-                        ForEach(winRatesData(for: deckSelected), id: \.matchNumber) { dataPoint in
-                            LineMark(
-                                x: .value("Match Number", dataPoint.matchNumber),
-                                y: .value("Win Rate", dataPoint.winRate)
-                            )
-                            .foregroundStyle(.orange)
-                        }
-                    }
-                    .chartXAxis {
-                        AxisMarks(position: .bottom, values: .automatic(desiredCount: 5))
-                    }
-                    .chartYAxis {
-                        AxisMarks(values: .stride(by: 10))
-                    }
-                    .bold()
-                    .padding()
-                    .background {
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundStyle(.black.opacity(0.6))
-                    }
-                    .frame(maxHeight: 200)
-                    .padding()
-                } header: {
-                    HStack {
-                        Text("Total matches: \(deckMatches)")
-                        Text("Wins: \(deckWins)")
-                            .foregroundStyle(.green)
-                        Text("Loses: \(deckLoses)")
-                            .foregroundStyle(.red)
-                        Text("wr: \(lastWinRate, specifier: "%.0f")%")
-                            .bold()
-                    }
-                    .font(.footnote)
-                    .fontWeight(.semibold)
-                    .shadowPop()
-                }
-                .onChange(of: deckSelected) {
-                    updateWinRates()
-                }
-                
-                Section {
+                if !groupedMatchesByDate.isEmpty {
                     Section {
-                        List {
-                            ForEach(groupedMatchesByDate.keys.sorted(by: >), id: \.self) { date in
-                                Section {
-                                    ForEach(groupedMatchesByDate[date] ?? [], id: \.self) { match in
-                                        VStack(alignment: .leading) {
-                                            ForEach(players.filter({ player in match.playersID.contains(player.id) }), id: \.self) { player in
-                                                HStack {
-                                                    Image(systemName: "crown.fill")
-                                                        .foregroundStyle(.yellow)
-                                                        .opacity(player.id == match.winnerID ? 1.0 : 0.0)
-                                                        .font(.footnote)
-                                                    
-                                                    Text(player.name)
-                                                        .font(.subheadline)
-                                                        .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
-                                                    
-                                                    Spacer()
-                                                    
-                                                    ForEach(player.decks.filter({ deck in match.decksID.contains(deck.id) }), id: \.self) { deck in
-                                                        HStack {
-                                                            Text(deck.name)
-                                                            Text("(\(deck.format.capitalized))")
-                                                                .foregroundStyle(.secondary)
-                                                                .font(.footnote)
+                        Chart {
+                            ForEach(winRatesData(for: deckSelected), id: \.matchNumber) { dataPoint in
+                                LineMark(
+                                    x: .value("Match Number", dataPoint.matchNumber),
+                                    y: .value("Win Rate", dataPoint.winRate)
+                                )
+                                .foregroundStyle(.orange)
+                            }
+                        }
+                        .chartXAxis {
+                            AxisMarks(position: .bottom, values: .automatic(desiredCount: 5))
+                        }
+                        .chartYAxis {
+                            AxisMarks(values: .stride(by: 10))
+                        }
+                        .bold()
+                        .padding()
+                        .background {
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundStyle(.black.opacity(0.6))
+                        }
+                        .frame(maxHeight: 200)
+                        .padding()
+                    } header: {
+                        HStack {
+                            Text("Total matches: \(deckMatches)")
+                            Text("Wins: \(deckWins)")
+                                .foregroundStyle(.green)
+                            Text("Loses: \(deckLoses)")
+                                .foregroundStyle(.red)
+                            Text("wr: \(lastWinRate, specifier: "%.0f")%")
+                                .bold()
+                        }
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                        .shadowPop()
+                    }
+                    .onChange(of: deckSelected) {
+                        updateWinRates()
+                    }
+                    
+                    Section {
+                        Section {
+                            List {
+                                ForEach(groupedMatchesByDate.keys.sorted(by: >), id: \.self) { date in
+                                    Section {
+                                        ForEach(groupedMatchesByDate[date] ?? [], id: \.self) { match in
+                                            VStack(alignment: .leading) {
+                                                ForEach(players.filter({ player in match.playersID.contains(player.id) }), id: \.self) { player in
+                                                    HStack {
+                                                        Image(systemName: "crown.fill")
+                                                            .foregroundStyle(.yellow)
+                                                            .opacity(player.id == match.winnerID ? 1.0 : 0.0)
+                                                            .font(.footnote)
+                                                        
+                                                        Text(player.name)
+                                                            .font(.subheadline)
+                                                            .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
+                                                        
+                                                        Spacer()
+                                                        
+                                                        ForEach(player.decks.filter({ deck in match.decksID.contains(deck.id) }), id: \.self) { deck in
+                                                            HStack {
+                                                                Text(deck.name)
+                                                                Text("(\(deck.format.capitalized))")
+                                                                    .foregroundStyle(.secondary)
+                                                                    .font(.footnote)
+                                                            }
+                                                            .font(.subheadline)
+                                                            .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
                                                         }
-                                                        .font(.subheadline)
-                                                        .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
                                                     }
                                                 }
                                             }
+                                            .padding(.vertical, 2)
+                                            .listRowBackground(
+                                                ZStack {
+                                                    RoundedRectangle(cornerRadius: 16)
+                                                        .foregroundStyle(.black.opacity(0.6))
+                                                    RoundedRectangle(cornerRadius: 16)
+                                                        .stroke(lineWidth: 3)
+                                                        .foregroundStyle(player.id == match.winnerID ? .green : .red)
+                                                }
+                                                    .padding(.vertical, 2)
+                                                    .shadowPop()
+                                            )
                                         }
-                                        .padding(.vertical, 2)
-                                        .listRowBackground(
-                                            ZStack {
-                                                RoundedRectangle(cornerRadius: 16)
-                                                    .foregroundStyle(.black.opacity(0.6))
-                                                RoundedRectangle(cornerRadius: 16)
-                                                    .stroke(lineWidth: 3)
-                                                    .foregroundStyle(player.id == match.winnerID ? .green : .red)
-                                            }
-                                                .padding(.vertical, 2)
-                                                .shadowPop()
-                                        )
+                                    } header: {
+                                        Text("\(date.formatted(date: .abbreviated, time: .omitted))")
+                                            .foregroundStyle(.white)
                                     }
-                                } header: {
-                                    Text("\(date.formatted(date: .abbreviated, time: .omitted))")
-                                        .foregroundStyle(.white)
+                                    .shadowPop()
                                 }
-                                .shadowPop()
                             }
+                            .listStyle(.plain)
+                            .scrollIndicators(.never)
                         }
-                        .listStyle(.plain)
-                        .scrollIndicators(.never)
+                        
+                    } header: {
+                        Text("Latest Matches")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .font(.title3)
+                            .bold()
+                            .shadowPop()
                     }
-                    
-                } header: {
-                    Text("Latest Matches")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.title3)
-                        .bold()
-                        .shadowPop()
+                    .padding(.horizontal)
+                } else {
+                    ContentUnavailableView(
+                        "There are no matches with this deck yet",
+                        systemImage: "rectangle.split.2x1.slash.fill",
+                        description: Text("Play some games!").foregroundStyle(.white)
+                    )
+                    .shadowPop()
                 }
-                .padding(.horizontal)
             }
             .navigationDestination(isPresented: $showDeletedDecks, destination: {
                 DeletedDecksView(player: player)

@@ -56,6 +56,7 @@ struct AddPlayerSheet: View {
                 name = ""
                 deckName = ""
                 format = .casual
+                hideKeyboard()
             } label: {
                 Text("Add Player")
                     .foregroundStyle(.black)
@@ -74,5 +75,9 @@ struct AddPlayerSheet: View {
     func addPlayer() {
         let player: Player = Player(name: name, decks: [Deck(name: deckName, format: format.rawValue, hasBeenDeleted: false)], favorite: false, matches: [])
         modelContext.insert(player)
+    }
+    
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

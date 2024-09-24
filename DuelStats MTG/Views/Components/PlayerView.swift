@@ -17,18 +17,15 @@ struct PlayerView: View {
     @State private var poisonCounters: Int = 0
     @State private var showPoison: Bool = false
     @State private var timer: Timer?
-    @State private var fondo: UIImage = .bgplayer2
-    @State private var color: Color = .swampColor1
+    @State private var fondo: UIImage = .cuadrado2
+    @State private var fondoIpad: UIImage = .horizontal2
     @State private var changeImage: Bool = false
-    @State private var isImage: Bool = true
     
     @Binding var someoneWon: Bool
     @Binding var playerWon: Player
     @Binding var deckWon: Deck
     
-    let fondoNames: [String] = ["bgplayer1", "bgplayer2", "bgplayer3", "bgplayer6", "bgplayer7", "bgplayer8", "bgplayer9", "bgplayer10", "bgplayer11", "bgplayer12"]
-    
-    let colorNames: [Color] = [.bubblegum, .forest, .isle, .orchid, .salmon, .swamp, .swampColor1]
+    let fondoNames: [String] = ["cuadrado1", "cuadrado2","cuadrado3","cuadrado4","cuadrado5","cuadrado6","cuadrado7","cuadrado8","cuadrado9","cuadrado10","cuadrado11","cuadrado12","cuadrado13"]
     
     let player: Player
     let deck: Deck
@@ -69,8 +66,9 @@ struct PlayerView: View {
                         Image(.poison)
                             .resizable()
                             .scaledToFit()
-                            .frame(maxWidth: 50)
+                            .frame(maxWidth: horizontalSizeClass == .compact ? 50 : 80)
                     }
+                    .offset(x: 4)
                     .shadowPop()
                     
                     Spacer()
@@ -87,6 +85,7 @@ struct PlayerView: View {
                 .font(horizontalSizeClass == .compact ? .title : .custom("ipad", size: 60))
                 .bold()
                 .padding()
+                .padding(.top)
                 
                 Text(player.name)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -94,7 +93,7 @@ struct PlayerView: View {
                     .bold()
                     .shadowPop()
                 
-                VStack(spacing: 10){
+                VStack(spacing: 10) {
                     HStack {
                         Button {
                             playerLife -= 1
@@ -185,12 +184,14 @@ struct PlayerView: View {
                 Spacer()
             }
             .background {
-                if isImage {
+                if horizontalSizeClass == .compact {
                     Image(uiImage: fondo)
                         .resizable()
-                        .scaledToFill()
+                        .scaledToFit()
                 } else {
-                    color
+                    Image(uiImage: fondoIpad)
+                        .resizable()
+                        .scaledToFill()
                 }
             }
             .tint(.white)
@@ -203,29 +204,9 @@ struct PlayerView: View {
                 playerLife = viewModel.startingLife
             }
             .blur(radius: changeImage ? 3.0 : 0.0)
+            .disabled(changeImage ? true : false)
             
             VStack {
-                HStack {
-                    Button {
-                        isImage = true
-                    } label: {
-                        Image(systemName: "photo.stack.fill")
-                            .foregroundStyle(.black)
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.orange)
-                    
-                    Button {
-                        isImage = false
-                    } label: {
-                        Image(systemName: "paintpalette.fill")
-                            .foregroundStyle(.black)
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.orange)
-                }
-                .padding(.top, 5)
-                
                 ZStack {
                     ScrollView(.horizontal) {
                         HStack {
@@ -244,26 +225,6 @@ struct PlayerView: View {
                         }
                         .padding()
                     }
-                    .opacity(isImage ? 1.0 : 0.0)
-                    .scrollIndicators(.never)
-                    .safeAreaPadding(.horizontal)
-                    
-                    ScrollView(.horizontal) {
-                        HStack {
-                            ForEach(colorNames, id: \.self) { color in
-                                color
-                                    .frame(width: 200, height: 200)
-                                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                                    .onTapGesture {
-                                        self.color = color
-                                        changeImage.toggle()
-                                    }
-                                    .shadowPop()
-                            }
-                        }
-                        .padding()
-                    }
-                    .opacity(isImage ? 0.0 : 1.0)
                     .scrollIndicators(.never)
                     .safeAreaPadding(.horizontal)
                 }

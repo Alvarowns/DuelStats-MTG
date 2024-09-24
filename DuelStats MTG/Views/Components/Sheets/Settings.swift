@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct Settings: View {
     @EnvironmentObject private var viewModel: MainVM
     @Environment(\.dismiss) var dismiss
+    @Query var containerModel: [ContainerModel]
     
-    let fondoNames: [String] = ["bg1", "bg2", "bg9", "bg10", "bg11", "bg13"]
+    let fondoNames: [String] = ["bg1", "bg2", "fondoFlat1", "fondoFlat3", "fondoFlat4", "fondoFlat5", "fondoVertical1", "fondoVertical3"]
     
     var body: some View {
         VStack {

@@ -16,30 +16,87 @@ struct MatchView: View {
     @State private var winnerDeck: Deck = Deck(name: "", format: "", hasBeenDeleted: false)
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                VStack {
-                    if viewModel.playersSelected.count == 2 {
-                        PlayerView(someoneWon: $someoneWon, playerWon: $winner, deckWon: $winnerDeck, player: Array(viewModel.playersSelected.keys)[0], deck: Array(viewModel.playersSelected.values)[0])
-                            .rotation3DEffect(.degrees(180), axis: (x: 0.0, y: 1.0, z: 0.0))
-                            .scaleEffect(x: 1, y: -1, anchor: .center)
-                            .frame(maxHeight: .infinity)
+        ZStack {
+            VStack(spacing: 0) {
+                if viewModel.playersSelected.count == 3 || viewModel.playersSelected.count == 4 {
+                    HStack(spacing: 0) {
+                        PlayerSmallView(
+                            someoneWon: $someoneWon,
+                            playerWon: $winner,
+                            deckWon: $winnerDeck,
+                            player: Array(
+                                viewModel.playersSelected.keys
+                            )[1],
+                            deck: Array(viewModel.playersSelected.values)[1],
+                            rotation: 90
+                        )
                         
-                        MenuView()
-                        
-                        PlayerView(someoneWon: $someoneWon, playerWon: $winner, deckWon: $winnerDeck, player: Array(viewModel.playersSelected.keys)[1], deck: Array(viewModel.playersSelected.values)[1])
-                            .frame(maxHeight: .infinity)
+                        PlayerSmallView(
+                            someoneWon: $someoneWon,
+                            playerWon: $winner,
+                            deckWon: $winnerDeck,
+                            player: Array(viewModel.playersSelected.keys)[2],
+                            deck: Array(viewModel.playersSelected.values)[2],
+                            rotation: -90
+                        )
                     }
+                } else if viewModel.playersSelected.count == 2 {
+                    PlayerView(
+                        someoneWon: $someoneWon,
+                        playerWon: $winner,
+                        deckWon: $winnerDeck,
+                        player: Array(viewModel.playersSelected.keys)[1],
+                        deck: Array(viewModel.playersSelected.values)[1]
+                    )
+                    .rotationEffect(.degrees(180))
                 }
-                .blur(radius: someoneWon ? 3.0 : 0.0)
-                .disabled(someoneWon ? true : false)
                 
-                WinnerPopUp(someoneWon: $someoneWon, winner: $winner, deck: $winnerDeck, title: "Did \(winner.name) won?", subtitle: "Deck: \(winnerDeck.name)")
+                if viewModel.playersSelected.count == 4 {
+                    HStack(spacing: 0) {
+                        PlayerSmallView(
+                            someoneWon: $someoneWon,
+                            playerWon: $winner,
+                            deckWon: $winnerDeck,
+                            player: Array(
+                                viewModel.playersSelected.keys
+                            )[0],
+                            deck: Array(viewModel.playersSelected.values)[0],
+                            rotation: 90
+                        )
+                        
+                        PlayerSmallView(
+                            someoneWon: $someoneWon,
+                            playerWon: $winner,
+                            deckWon: $winnerDeck,
+                            player: Array(viewModel.playersSelected.keys)[3],
+                            deck: Array(viewModel.playersSelected.values)[3],
+                            rotation: -90
+                        )
+                    }
+                    .ignoresSafeArea(edges: .bottom)
+                } else {
+                    PlayerView(
+                        someoneWon: $someoneWon,
+                        playerWon: $winner,
+                        deckWon: $winnerDeck,
+                        player: Array(viewModel.playersSelected.keys)[0],
+                        deck: Array(viewModel.playersSelected.values)[0]
+                    )
+                }
             }
-        }
-        .navigationBarBackButtonHidden()
-        .onAppear {
-            viewModel.gameStarted = true
+            .onAppear {
+                viewModel.gameStarted = true
+            }
+            .onAppear {
+                UIApplication.shared.isIdleTimerDisabled = true
+            }
+            .onDisappear {
+                UIApplication.shared.isIdleTimerDisabled = false
+            }
+            
+            MenuView()
+            
+            WinnerPopUp(someoneWon: $someoneWon, winner: $winner, deck: $winnerDeck, title: "Did \(winner.name) won?", subtitle: "Deck: \(winnerDeck.name)")
         }
     }
 }

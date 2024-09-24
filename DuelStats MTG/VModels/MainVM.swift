@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @Observable
 class MainVM: ObservableObject {
@@ -16,17 +17,13 @@ class MainVM: ObservableObject {
     var currentLife: [Player: Int] = [:]
     var changeLife: Bool = false
     var changePlayersNumbers: Bool = false
-    var backgroundImage: UIImage = .bg2
+    var backgroundImage: UIImage = .bg1
     
     var gameStarted: Bool = false
     
     var playersSelected: [Player: Deck] = [:]
     
     let colors: [Color] = [.swampColor1, .salmon, .isle, .forest, .orchid, .swamp, .bubblegum]
-    
-    init() {
-        
-    }
     
     func selectPlayer(_ player: Player, withDeck deck: Deck) {
         if !playersSelected.contains(where: { $0.key.id == player.id }) {

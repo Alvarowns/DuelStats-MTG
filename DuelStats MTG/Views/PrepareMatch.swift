@@ -19,9 +19,9 @@ struct PrepareMatch: View {
     
     var filteredSearch: [Player] {
         if !search.isEmpty {
-            return players.filter { $0.name.lowercased().contains(search.lowercased()) }
+            return players.filter { $0.name.lowercased().contains(search.lowercased()) }.sorted { $0.favorite && !$1.favorite }
         }
-        return players
+        return players.sorted { $0.favorite && !$1.favorite }
     }
     
     var body: some View {
@@ -68,7 +68,7 @@ struct PrepareMatch: View {
                                 }
                                 .contentShape(Rectangle())
                                 .onTapGesture {
-                                    if !playersSelected.contains(player) {
+                                    if !playersSelected.contains(player) && playersSelected.count != 4 {
                                         playersSelected.append(player)
                                     } else {
                                         playersSelected.removeAll { $0 == player }

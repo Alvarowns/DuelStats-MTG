@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MainView: View {
     @EnvironmentObject private var viewModel: MainVM
-    
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+
     @State private var settings: Bool = false
     
     var body: some View {
@@ -21,7 +23,6 @@ struct MainView: View {
                     Image(systemName: "gearshape")
                 }
             }
-            .font(.title2)
             .frame(maxWidth: .infinity, alignment: .trailing)
             .bold()
             .padding(.horizontal)
@@ -34,11 +35,11 @@ struct MainView: View {
             Image(.dsPet)
                 .resizable()
                 .scaledToFit()
-                .frame(maxHeight: 300)
+                .frame(maxHeight: horizontalSizeClass == .compact ? 300 : 500)
                 .shadowPop()
             
             Text("DuelStats MTG")
-                .font(.largeTitle)
+                .font(horizontalSizeClass == .compact ? .largeTitle : .custom("iPad", size: 60))
                 .foregroundStyle(.orange)
                 .padding()
                 .bold()
@@ -52,7 +53,7 @@ struct MainView: View {
                 viewModel.appState = .tabBar
             } label: {
                 Text("Start")
-                    .font(.title3)
+                    .font(horizontalSizeClass == .compact ? .title3 : .title)
                     .bold()
                     .padding(10)
                     .frame(maxWidth: .infinity)

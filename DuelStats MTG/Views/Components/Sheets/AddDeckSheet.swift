@@ -50,6 +50,7 @@ struct AddDeckSheet: View {
                 addDeck()
                 deckName = ""
                 format = .casual
+                hideKeyboard()
             } label: {
                 Text("Add Deck")
             }
@@ -73,5 +74,9 @@ struct AddDeckSheet: View {
     
     func isInputValid( deck: String, format: Format) -> Bool {
         return !deck.isEmpty && !format.rawValue.isEmpty
+    }
+    
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

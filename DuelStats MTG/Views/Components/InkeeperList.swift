@@ -20,9 +20,9 @@ struct InkeeperList: View {
     
     var filteredSearch: [Player] {
         if !search.isEmpty {
-            return players.filter { $0.name.lowercased().contains(search.lowercased()) }
+            return players.filter { $0.name.lowercased().contains(search.lowercased()) }.sorted { $0.favorite && !$1.favorite }
         }
-        return players
+        return players.sorted { $0.favorite && !$1.favorite }
     }
     
     var body: some View {
@@ -32,14 +32,14 @@ struct InkeeperList: View {
                         ContentUnavailableView(
                             "There are no players yet",
                             systemImage: "person.slash.fill",
-                            description: Text("Add new players!")
+                            description: Text("Add new players!").foregroundStyle(.white)
                         )
                         .shadowPop()
                     } else if filteredSearch.isEmpty {
                         ContentUnavailableView(
                             "There are no players that matches that name",
                             systemImage: "person.slash.fill",
-                            description: Text("Try with another name!")
+                            description: Text("Try with another name!").foregroundStyle(.white)
                         )
                         .shadowPop()
                     } else {

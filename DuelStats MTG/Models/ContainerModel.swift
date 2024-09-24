@@ -5,7 +5,7 @@
 //  Created by Alvaro Santos Orellana on 10/9/24.
 //
 
-import Foundation
+import SwiftUI
 import SwiftData
 
 @Model

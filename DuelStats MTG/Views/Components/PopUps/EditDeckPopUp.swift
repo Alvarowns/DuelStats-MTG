@@ -42,6 +42,7 @@ struct EditDeckPopUp: View {
             HStack {
                 Button {
                     editDeck = false
+                    hideKeyboard()
                 } label: {
                     Text("Cancel")
                         .bold()
@@ -54,6 +55,7 @@ struct EditDeckPopUp: View {
                 Button {
                     changeDeckName(deckToEdit, withName: newDeckName, inFormat: newFormat.rawValue)
                     editDeck = false
+                    hideKeyboard()
                 } label: {
                     Text("Change")
                         .bold()
@@ -83,5 +85,9 @@ struct EditDeckPopUp: View {
         deck.format = newFormat
         
         print(deck.name)
+    }
+    
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

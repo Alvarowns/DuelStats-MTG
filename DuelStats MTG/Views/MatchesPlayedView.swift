@@ -11,6 +11,7 @@ import SwiftData
 struct MatchesPlayedView: View {
     @EnvironmentObject private var viewModel: MainVM
     @Environment(\.modelContext) var modelContext
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Query(sort: \SingleMatch.date, order: .reverse) var matches: [SingleMatch]
     @Query var players: [Player]
     
