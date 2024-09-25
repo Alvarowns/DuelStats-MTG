@@ -244,6 +244,9 @@ struct PlayerView: View {
             .padding(.horizontal)
             .opacity(changeImage ? 1.0 : 0.0)
         }
+        .onTapGesture {
+            changeImage = false
+        }
     }
     
     private func restartTimer() {

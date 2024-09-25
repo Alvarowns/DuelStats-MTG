@@ -160,6 +160,9 @@ struct PlayerProfile: View {
                     .onChange(of: deckSelected) {
                         updateWinRates()
                     }
+                    .onAppear {
+                        updateWinRates()
+                    }
                     
                     Section {
                         Section {

@@ -150,6 +150,7 @@ struct PlayerSmallView: View {
                         .padding(.horizontal)
                         .padding(.horizontal)
                         .frame(minWidth: horizontalSizeClass == .compact ? geometry.size.width * 2 : geometry.size.width * 1.2)
+                        .offset(y: -10)
                         .opacity(showPoison && horizontalSizeClass == .compact ? 0.0 : 1.0)
                         .transition(.opacity)
                         .animation(.spring, value: showPoison)
@@ -311,6 +312,9 @@ struct PlayerSmallView: View {
                 .padding(.horizontal)
                 .opacity(changeImage ? 1.0 : 0.0)
                 .rotationEffect(.degrees(rotation), anchor: .center)
+            }
+            .onTapGesture {
+                changeImage = false
             }
         }
     }
