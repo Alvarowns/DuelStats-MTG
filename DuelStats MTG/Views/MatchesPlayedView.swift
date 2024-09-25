@@ -14,6 +14,7 @@ struct MatchesPlayedView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Query(sort: \SingleMatch.date, order: .reverse) var matches: [SingleMatch]
     @Query var players: [Player]
+    @Query var background: [BackgroundPersistent]
     
     @State private var showInfo: Bool = false
     @State private var settings: Bool = false
@@ -114,10 +115,19 @@ struct MatchesPlayedView: View {
                 }
                 .padding()
                 .background {
-                    Image(uiImage: viewModel.backgroundImage)
-                        .resizable()
-                        .scaledToFill()
-                        .ignoresSafeArea()
+                    if let background = background.first?.image {
+                        Image("\(background)")
+                            .resizable()
+                            .scaledToFill()
+                            .opacity(0.5)
+                            .ignoresSafeArea()
+                    } else {
+                        Image(uiImage: viewModel.backgroundImage)
+                            .resizable()
+                            .scaledToFill()
+                            .opacity(0.5)
+                            .ignoresSafeArea()
+                    }
                 }
                 
                 InfoPopUp(showInfo: $showInfo, title: "You can swipe left to delete any match", subtitle: "Be careful, this action will remove the match permanently!", message: "")

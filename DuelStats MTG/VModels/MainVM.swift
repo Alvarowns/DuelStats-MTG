@@ -10,20 +10,18 @@ import SwiftData
 
 @Observable
 class MainVM: ObservableObject {
-    var appState: AppState = .startingView
+    var appState: AppState = .splash
     
     var startingLife: Int = 20
     var restartLifes: Bool = false
     var currentLife: [Player: Int] = [:]
     var changeLife: Bool = false
     var changePlayersNumbers: Bool = false
-    var backgroundImage: UIImage = .bg1
+    var backgroundImage: UIImage = .bg2
     
     var gameStarted: Bool = false
     
     var playersSelected: [Player: Deck] = [:]
-    
-    let colors: [Color] = [.swampColor1, .salmon, .isle, .forest, .orchid, .swamp, .bubblegum]
     
     func selectPlayer(_ player: Player, withDeck deck: Deck) {
         if !playersSelected.contains(where: { $0.key.id == player.id }) {

@@ -57,15 +57,22 @@ struct PlayerSmallView: View {
                         
                         Spacer()
                         
-                        Button {
-                            showPoison.toggle()
-                        } label: {
-                            Image(.poison)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(maxWidth: horizontalSizeClass == .compact ? 30 : 80)
+                        HStack(spacing: 0) {
+                            Button {
+                                showPoison.toggle()
+                            } label: {
+                                Image(.poison)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(maxWidth: horizontalSizeClass == .compact ? 30 : 80)
+                            }
+                            
+                            Text("\(poisonCounters)")
+                                .font(horizontalSizeClass == .compact ? .subheadline : .title)
+                                .foregroundStyle(.green)
+                                .bold()
+                                .opacity(poisonCounters > 0 ? 1.0 : 0.0)
                         }
-                        .offset(x: 2)
                         .shadowPop()
                         
                         Spacer()

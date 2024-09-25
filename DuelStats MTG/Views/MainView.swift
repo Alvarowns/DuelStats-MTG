@@ -11,6 +11,7 @@ import SwiftData
 struct MainView: View {
     @EnvironmentObject private var viewModel: MainVM
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Query var background: [BackgroundPersistent]
 
     @State private var settings: Bool = false
     
@@ -43,7 +44,7 @@ struct MainView: View {
                 .font(horizontalSizeClass == .compact ? .largeTitle : .custom("iPad", size: 60))
                 .foregroundStyle(.orange)
                 .padding()
-                .bold()
+                .fontWeight(.heavy)
                 .shadowPop()
                 .shadowPop()
             
@@ -69,11 +70,19 @@ struct MainView: View {
             Settings()
         }
         .background {
-            Image(uiImage: viewModel.backgroundImage)
-                .resizable()
-                .scaledToFill()
-                .opacity(0.5)
-                .ignoresSafeArea()
+            if let background = background.first?.image {
+                Image("\(background)")
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(0.5)
+                    .ignoresSafeArea()
+            } else {
+                Image(uiImage: viewModel.backgroundImage)
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(0.5)
+                    .ignoresSafeArea()
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ import SwiftData
 
 struct PlayersView: View {
     @EnvironmentObject private var viewModel: MainVM
+    @Query var background: [BackgroundPersistent]
     
     @State private var sheet: Bool = false
     @State private var startGame: Bool = false
@@ -37,10 +38,19 @@ struct PlayersView: View {
                     InkeeperList()
                 }
                 .background {
-                    Image(uiImage: viewModel.backgroundImage)
-                        .resizable()
-                        .scaledToFill()
-                        .ignoresSafeArea()
+                    if let background = background.first?.image {
+                        Image("\(background)")
+                            .resizable()
+                            .scaledToFill()
+                            .opacity(0.5)
+                            .ignoresSafeArea()
+                    } else {
+                        Image(uiImage: viewModel.backgroundImage)
+                            .resizable()
+                            .scaledToFill()
+                            .opacity(0.5)
+                            .ignoresSafeArea()
+                    }
                 }
                 .disabled(showInfo ? true: false)
                 .blur(radius: showInfo ? 3 : 0)

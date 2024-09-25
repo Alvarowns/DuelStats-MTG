@@ -11,6 +11,7 @@ import SwiftData
 struct PrepareMatch: View {
     @EnvironmentObject private var viewModel: MainVM
     @Query var players: [Player]
+    @Query var background: [BackgroundPersistent]
     
     @State private var search: String = ""
     @State private var playersSelected: [Player] = []
@@ -116,10 +117,19 @@ struct PrepareMatch: View {
                 }
             }
             .background {
-                Image(uiImage: viewModel.backgroundImage)
-                    .resizable()
-                    .scaledToFill()
-                    .ignoresSafeArea()
+                if let background = background.first?.image {
+                    Image("\(background)")
+                        .resizable()
+                        .scaledToFill()
+                        .opacity(0.5)
+                        .ignoresSafeArea()
+                } else {
+                    Image(uiImage: viewModel.backgroundImage)
+                        .resizable()
+                        .scaledToFill()
+                        .opacity(0.5)
+                        .ignoresSafeArea()
+                }
             }
             .fullScreenCover(isPresented: $settings) {
                 Settings()

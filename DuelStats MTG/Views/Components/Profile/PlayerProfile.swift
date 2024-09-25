@@ -15,6 +15,7 @@ struct PlayerProfile: View {
     @Environment(\.modelContext) var modelContext
     @Query(sort: \SingleMatch.date, order: .reverse) var matches: [SingleMatch]
     @Query var players: [Player]
+    @Query var background: [BackgroundPersistent]
     
     @State private var editDeck: Bool = false
     @State private var addDeck: Bool = false
@@ -133,6 +134,7 @@ struct PlayerProfile: View {
                         .chartYAxis {
                             AxisMarks(values: .stride(by: 10))
                         }
+                        .shadowPop()
                         .bold()
                         .padding()
                         .background {
@@ -162,7 +164,11 @@ struct PlayerProfile: View {
                     Section {
                         Section {
                             List {
-                                ForEach(groupedMatchesByDate.keys.sorted(by: >), id: \.self) { date in
+                                let lastTenMatches = matches.sorted(by: { $0.date > $1.date }).prefix(10)
+                                let lastTenGroupedMatchesByDate = Dictionary(grouping: lastTenMatches) { match in
+                                    Calendar.current.startOfDay(for: match.date)
+                                }
+                                ForEach(lastTenGroupedMatchesByDate.keys.sorted(by: >), id: \.self) { date in
                                     Section {
                                         ForEach(groupedMatchesByDate[date] ?? [], id: \.self) { match in
                                             VStack(alignment: .leading) {
@@ -261,10 +267,19 @@ struct PlayerProfile: View {
                 }
             }
             .background {
-                Image(uiImage: viewModel.backgroundImage)
-                    .resizable()
-                    .scaledToFill()
-                    .ignoresSafeArea()
+                if let background = background.first?.image {
+                    Image("\(background)")
+                        .resizable()
+                        .scaledToFill()
+                        .opacity(0.5)
+                        .ignoresSafeArea()
+                } else {
+                    Image(uiImage: viewModel.backgroundImage)
+                        .resizable()
+                        .scaledToFill()
+                        .opacity(0.5)
+                        .ignoresSafeArea()
+                }
             }
             .sheet(isPresented: $addDeck) {
                 AddDeckSheet(sheet: $addDeck, player: player)
@@ -287,15 +302,15 @@ struct PlayerProfile: View {
         var winCount = 0
         var matchCount = 0
         
-        for match in matches {
-            if match.decksID.contains(deck.id) {
-                matchCount += 1
-                if match.winnerDeckID == deck.id {
-                    winCount += 1
-                }
-                let winRate = (Double(winCount) / Double(matchCount)) * 100
-                winRates.append(WinRateDataPoint(matchNumber: matchCount, winRate: winRate))
+        let filteredMatches = matches.filter { $0.decksID.contains(deck.id) }.sorted(by: { $0.date < $1.date })
+        
+        for match in filteredMatches {
+            matchCount += 1
+            if match.winnerDeckID == deck.id {
+                winCount += 1
             }
+            let winRate = (Double(winCount) / Double(matchCount)) * 100
+            winRates.append(WinRateDataPoint(matchNumber: matchCount, winRate: winRate))
         }
         return winRates
     }

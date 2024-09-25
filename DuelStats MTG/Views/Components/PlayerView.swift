@@ -60,15 +60,22 @@ struct PlayerView: View {
                     
                     Spacer()
                     
-                    Button {
-                        showPoison.toggle()
-                    } label: {
-                        Image(.poison)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: horizontalSizeClass == .compact ? 50 : 80)
+                    HStack(spacing: 0) {
+                        Button {
+                            showPoison.toggle()
+                        } label: {
+                            Image(.poison)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxWidth: horizontalSizeClass == .compact ? 30 : 80)
+                        }
+                        
+                        Text("\(poisonCounters)")
+                            .font(horizontalSizeClass == .compact ? .headline : .largeTitle)
+                            .foregroundStyle(.green)
+                            .bold()
+                            .opacity(poisonCounters > 0 ? 1.0 : 0.0)
                     }
-                    .offset(x: 4)
                     .shadowPop()
                     
                     Spacer()
@@ -149,7 +156,7 @@ struct PlayerView: View {
                             Image(systemName: "minus.circle")
                         }
                         .shadowPop()
-                        .font(.title)
+                        .font(horizontalSizeClass == .compact ? .title : .largeTitle)
                         .buttonRepeatBehavior(.enabled)
                         .padding()
                         
@@ -157,7 +164,7 @@ struct PlayerView: View {
                         
                         VStack(spacing: 0) {
                             Text("\(poisonCounters)")
-                                .font(.largeTitle)
+                                .font(horizontalSizeClass == .compact ? .largeTitle : .custom("iPad", size: 100))
                         }
                         .shadowPop()
                         
@@ -169,7 +176,7 @@ struct PlayerView: View {
                             Image(systemName: "plus.circle")
                         }
                         .shadowPop()
-                        .font(.title)
+                        .font(horizontalSizeClass == .compact ? .title : .largeTitle)
                         .buttonRepeatBehavior(.enabled)
                         .padding()
                         

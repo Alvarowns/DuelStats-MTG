@@ -63,7 +63,7 @@ struct AddDeckSheet: View {
         }
         .padding()
         .presentationDetents([.fraction(1/4)])
-        .tint(.salmon)
+        .tint(.orange)
     }
     
     func addDeck() {

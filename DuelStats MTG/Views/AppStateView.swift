@@ -14,7 +14,7 @@ struct AppStateView: View {
         Group {
             switch viewModel.appState {
             case .splash:
-                Text("Splash View")
+                SplashView()
             case .startingView:
                 MainView()
             case .tabBar:

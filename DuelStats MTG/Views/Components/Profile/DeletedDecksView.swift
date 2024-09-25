@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct DeletedDecksView: View {
     @EnvironmentObject private var viewModel: MainVM
+    @Query var background: [BackgroundPersistent]
     
     var player: Player
     
@@ -46,10 +48,19 @@ struct DeletedDecksView: View {
         .navigationTitle("Decks deleted")
         .navigationBarTitleDisplayMode(.inline)
         .background {
-            Image(uiImage: viewModel.backgroundImage)
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
+            if let background = background.first?.image {
+                Image("\(background)")
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(0.5)
+                    .ignoresSafeArea()
+            } else {
+                Image(uiImage: viewModel.backgroundImage)
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(0.5)
+                    .ignoresSafeArea()
+            }
         }
     }
 }

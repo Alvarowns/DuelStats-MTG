@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct PrepareDecksView: View {
     @EnvironmentObject private var viewModel: MainVM
+    @Query var background: [BackgroundPersistent]
     
     @State private var selecteds: [Player: Deck] = [:]
     
@@ -81,10 +83,19 @@ struct PrepareDecksView: View {
             }
         }
         .background {
-            Image(uiImage: viewModel.backgroundImage)
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
+            if let background = background.first?.image {
+                Image("\(background)")
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(0.5)
+                    .ignoresSafeArea()
+            } else {
+                Image(uiImage: viewModel.backgroundImage)
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(0.5)
+                    .ignoresSafeArea()
+            }
         }
     }
 }

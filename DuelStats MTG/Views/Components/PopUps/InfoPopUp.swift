@@ -24,6 +24,7 @@ struct InfoPopUp: View {
                 .font(.headline)
             Text(message)
                 .font(.subheadline)
+                .foregroundStyle(.red)
             
             Button {
                 showInfo = false
