@@ -62,7 +62,7 @@ struct PlayersView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Text("The Inkeeper")
+                    Text("Inkeeper")
                         .font(.largeTitle)
                         .foregroundStyle(.white)
                         .bold()
