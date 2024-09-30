@@ -30,7 +30,7 @@ struct SplashView: View {
                 
                 Text("DuelStats MTG")
                     .font(horizontalSizeClass == .compact ? .largeTitle : .custom("iPad", size: 60))
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(.white)
                     .padding()
                     .fontWeight(.heavy)
                     .shadowPop()

@@ -31,6 +31,7 @@ struct PrepareDecksView: View {
                                         .font(.title)
                                         .foregroundStyle(.orange)
                                 }
+                                .padding(5)
                                 .contentShape(Rectangle())
                                 .onTapGesture {
                                     selecteds.updateValue(deck, forKey: player)
@@ -52,6 +53,7 @@ struct PrepareDecksView: View {
                             .stroke(lineWidth: 3)
                             .foregroundStyle(.black)
                     }
+                        .padding(5)
                 )
             }
             .padding()
@@ -60,6 +62,7 @@ struct PrepareDecksView: View {
             
             VStack(spacing: 0) {
                 Text("Select at least 1 deck per player to start a game")
+                    .multilineTextAlignment(.center)
                     .font(.footnote)
                     .foregroundStyle(.white)
                     .shadowPop()

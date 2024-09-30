@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct WinnerPopUp: View {
     @EnvironmentObject private var viewModel: MainVM
     @Environment(\.modelContext) var modelContext
+    @Query var background: [BackgroundPersistent]
     
     @Binding var someoneWon: Bool
     @Binding var winner: Player
@@ -23,9 +25,18 @@ struct WinnerPopUp: View {
             Text(title)
                 .bold()
                 .font(.title)
+                .shadowPop()
+            
+            Image(.trophy)
+                .resizable()
+                .scaledToFit()
+                .frame(maxHeight: 200)
+                .shadowPop()
+            
             Text(subtitle)
                 .bold()
                 .font(.headline)
+                .shadowPop()
             
             HStack {
                 Button {
@@ -38,6 +49,7 @@ struct WinnerPopUp: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(.red)
+                .shadowPop()
                 
                 Button {
                     recordWinner(players: viewModel.playersSelected, winner: winner, withDeck: deck)
@@ -50,6 +62,7 @@ struct WinnerPopUp: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(.orange)
+                .shadowPop()
             }
             .frame(maxWidth: .infinity)
         }
@@ -57,10 +70,26 @@ struct WinnerPopUp: View {
         .foregroundStyle(.white)
         .padding()
         .background {
-            RoundedRectangle(cornerRadius: 20)
-                .foregroundStyle(.black)
-                .shadow(color: .white, radius: 2)
+            if let background = background.first?.image {
+                Image("\(background)")
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(0.8)
+                    .ignoresSafeArea()
+                    .frame(maxHeight: 400)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+            } else {
+                Image(uiImage: viewModel.backgroundImage)
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(0.8)
+                    .ignoresSafeArea()
+                    .frame(maxHeight: 400)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+            }
         }
+        .shadowPop()
+        .shadowPop()
         .padding()
         .opacity(someoneWon ? 1.0 : 0.0)
     }

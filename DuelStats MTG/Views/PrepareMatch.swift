@@ -67,6 +67,7 @@ struct PrepareMatch: View {
                                     }
                                     .padding(.vertical, 10)
                                 }
+                                .padding(5)
                                 .contentShape(Rectangle())
                                 .onTapGesture {
                                     if !playersSelected.contains(player) && playersSelected.count != 4 {
@@ -83,6 +84,7 @@ struct PrepareMatch: View {
                                             .stroke(lineWidth: 3)
                                             .foregroundStyle(.black)
                                     }
+                                        .padding(5)
                                 )
                             }
                         }
@@ -91,6 +93,7 @@ struct PrepareMatch: View {
                         
                         VStack(spacing: 0) {
                             Text("Select at least 2 players to start a game")
+                                .multilineTextAlignment(.center)
                                 .font(.footnote)
                                 .foregroundStyle(.white)
                                 .shadowPop()

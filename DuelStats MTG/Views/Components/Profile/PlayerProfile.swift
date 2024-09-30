@@ -88,6 +88,7 @@ struct PlayerProfile: View {
                     Spacer()
                     
                     Button {
+                        newDeckName = deckSelected.name
                         deckToEdit = deckSelected
                         switch deckSelected.format {
                         case "casual": newFormat = .casual
@@ -172,53 +173,55 @@ struct PlayerProfile: View {
                                     Calendar.current.startOfDay(for: match.date)
                                 }
                                 ForEach(lastTenGroupedMatchesByDate.keys.sorted(by: >), id: \.self) { date in
-                                    Section {
-                                        ForEach(groupedMatchesByDate[date] ?? [], id: \.self) { match in
-                                            VStack(alignment: .leading) {
-                                                ForEach(players.filter({ player in match.playersID.contains(player.id) }), id: \.self) { player in
-                                                    HStack {
-                                                        Image(systemName: "crown.fill")
-                                                            .foregroundStyle(.yellow)
-                                                            .opacity(player.id == match.winnerID ? 1.0 : 0.0)
-                                                            .font(.footnote)
-                                                        
-                                                        Text(player.name)
-                                                            .font(.subheadline)
-                                                            .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
-                                                        
-                                                        Spacer()
-                                                        
-                                                        ForEach(player.decks.filter({ deck in match.decksID.contains(deck.id) }), id: \.self) { deck in
-                                                            HStack {
-                                                                Text(deck.name)
-                                                                Text("(\(deck.format.capitalized))")
-                                                                    .foregroundStyle(.secondary)
-                                                                    .font(.footnote)
+                                    if let dayMatches = groupedMatchesByDate[date], !dayMatches.isEmpty {
+                                        Section {
+                                            ForEach(groupedMatchesByDate[date] ?? [], id: \.self) { match in
+                                                VStack(alignment: .leading) {
+                                                    ForEach(players.filter({ player in match.playersID.contains(player.id) }), id: \.self) { player in
+                                                        HStack {
+                                                            Image(systemName: "crown.fill")
+                                                                .foregroundStyle(.yellow)
+                                                                .opacity(player.id == match.winnerID ? 1.0 : 0.0)
+                                                                .font(.footnote)
+                                                            
+                                                            Text(player.name)
+                                                                .font(.subheadline)
+                                                                .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
+                                                            
+                                                            Spacer()
+                                                            
+                                                            ForEach(player.decks.filter({ deck in match.decksID.contains(deck.id) }), id: \.self) { deck in
+                                                                HStack {
+                                                                    Text(deck.name)
+                                                                    Text("(\(deck.format.capitalized))")
+                                                                        .foregroundStyle(.secondary)
+                                                                        .font(.footnote)
+                                                                }
+                                                                .font(.subheadline)
+                                                                .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
                                                             }
-                                                            .font(.subheadline)
-                                                            .foregroundStyle(player.id == match.winnerID ? .yellow : .secondary)
                                                         }
                                                     }
                                                 }
+                                                .padding(5)
+                                                .listRowBackground(
+                                                    ZStack {
+                                                        RoundedRectangle(cornerRadius: 16)
+                                                            .foregroundStyle(.black.opacity(0.6))
+                                                        RoundedRectangle(cornerRadius: 16)
+                                                            .stroke(lineWidth: 3)
+                                                            .foregroundStyle(player.id == match.winnerID ? .green : .red)
+                                                    }
+                                                        .padding(5)
+                                                        .shadowPop()
+                                                )
                                             }
-                                            .padding(.vertical, 2)
-                                            .listRowBackground(
-                                                ZStack {
-                                                    RoundedRectangle(cornerRadius: 16)
-                                                        .foregroundStyle(.black.opacity(0.6))
-                                                    RoundedRectangle(cornerRadius: 16)
-                                                        .stroke(lineWidth: 3)
-                                                        .foregroundStyle(player.id == match.winnerID ? .green : .red)
-                                                }
-                                                    .padding(.vertical, 2)
-                                                    .shadowPop()
-                                            )
+                                        } header: {
+                                            Text("\(date.formatted(date: .abbreviated, time: .omitted))")
+                                                .foregroundStyle(.white)
                                         }
-                                    } header: {
-                                        Text("\(date.formatted(date: .abbreviated, time: .omitted))")
-                                            .foregroundStyle(.white)
+                                        .shadowPop()
                                     }
-                                    .shadowPop()
                                 }
                             }
                             .listStyle(.plain)

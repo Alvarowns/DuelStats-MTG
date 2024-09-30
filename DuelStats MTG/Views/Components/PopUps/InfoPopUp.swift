@@ -19,9 +19,13 @@ struct InfoPopUp: View {
             Text(title)
                 .bold()
                 .font(.title3)
+                .foregroundStyle(.white)
+            
             Text(subtitle)
                 .bold()
                 .font(.headline)
+                .foregroundStyle(.white)
+            
             Text(message)
                 .font(.subheadline)
                 .foregroundStyle(.red)
@@ -37,11 +41,10 @@ struct InfoPopUp: View {
             .buttonStyle(.borderedProminent)
         }
         .multilineTextAlignment(.center)
-        .foregroundStyle(.white)
         .padding()
         .background {
             RoundedRectangle(cornerRadius: 20)
-                .foregroundStyle(.black)
+                .foregroundStyle(.lead)
                 .shadow(color: .white, radius: 2)
         }
         .padding()

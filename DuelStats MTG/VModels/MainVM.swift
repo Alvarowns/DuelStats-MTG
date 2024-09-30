@@ -17,7 +17,7 @@ class MainVM: ObservableObject {
     var currentLife: [Player: Int] = [:]
     var changeLife: Bool = false
     var changePlayersNumbers: Bool = false
-    var backgroundImage: UIImage = .bg2
+    var backgroundImage: UIImage = .fondoVertical1
     
     var gameStarted: Bool = false
     

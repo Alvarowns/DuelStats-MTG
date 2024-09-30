@@ -91,7 +91,6 @@ struct MenuView: View {
         .alert("Are you sure you want to end this game?", isPresented: $endGame) {
             Button("Yes") {
                 viewModel.gameStarted = false
-                viewModel.playersSelected = [:]
             }
             Button("No", role: .cancel) {}
         } message: {

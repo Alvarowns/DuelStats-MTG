@@ -16,14 +16,24 @@ struct EditDeckPopUp: View {
     var body: some View {
         VStack(spacing: 20) {
             VStack(alignment: .leading) {
-                TextField("Editing deck \(deckToEdit.name)", text: $newDeckName)
-                    .onChange(of: newDeckName) {
-                                    if newDeckName.count > 20 {
-                                        newDeckName = String(newDeckName.prefix(20))
+                Text("Editing \(deckToEdit.name)")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                
+                HStack {
+                    Text("Change Name:")
+                    Spacer()
+                    TextField("New name for \(deckToEdit.name)", text: $newDeckName)
+                        .bold()
+                        .onChange(of: newDeckName) {
+                                        if newDeckName.count > 20 {
+                                            newDeckName = String(newDeckName.prefix(20))
+                                        }
                                     }
-                                }
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.words)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.words)
+                        .textFieldStyle(.roundedBorder)
+                }
                     
                 
                 HStack {
@@ -71,7 +81,7 @@ struct EditDeckPopUp: View {
         .padding()
         .background {
             RoundedRectangle(cornerRadius: 20)
-                .foregroundStyle(.black)
+                .foregroundStyle(.lead)
                 .shadow(color: .white, radius: 2)
         }
         .padding()

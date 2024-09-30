@@ -89,6 +89,7 @@ struct MatchesPlayedView: View {
                                                 }
                                             }
                                         }
+                                        .padding(5)
                                     }
                                     .onDelete(perform: deleteMatch(_:))
                                     .listRowBackground(
@@ -99,6 +100,7 @@ struct MatchesPlayedView: View {
                                                 .stroke(lineWidth: 3)
                                                 .foregroundStyle(.black)
                                         }
+                                            .padding(5)
                                     )
                                 } header: {
                                     Text("\(date.formatted(date: .abbreviated, time: .omitted))")
@@ -130,7 +132,7 @@ struct MatchesPlayedView: View {
                     }
                 }
                 
-                InfoPopUp(showInfo: $showInfo, title: "You can swipe left to delete any match", subtitle: "Be careful, this action will remove the match permanently!", message: "")
+                InfoPopUp(showInfo: $showInfo, title: "You can swipe left to delete any match", subtitle: "", message: "Be careful, this action will remove the match permanently!")
             }
             .searchable(text: $search, prompt: "Search for a player")
             .fullScreenCover(isPresented: $settings) {

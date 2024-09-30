@@ -33,6 +33,7 @@
 		C7A908D92C998E8F00AED0F7 /* EditDeckPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A908D82C998E8F00AED0F7 /* EditDeckPopUp.swift */; };
 		C7A908DE2C99971200AED0F7 /* DecksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A908DD2C99971200AED0F7 /* DecksList.swift */; };
 		C7A908E02C99A21000AED0F7 /* DeletedDecksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A908DF2C99A21000AED0F7 /* DeletedDecksView.swift */; };
+		C7AA59C52CAAFFCC0030559D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C7AA59C42CAAFFCC0030559D /* Localizable.xcstrings */; };
 		C7CE516A2CA01C1500E79301 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE51692CA01C1500E79301 /* MainView.swift */; };
 		C7CE516C2CA0260B00E79301 /* AppStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE516B2CA0260B00E79301 /* AppStateView.swift */; };
 		C7CE516E2CA0376700E79301 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE516D2CA0376700E79301 /* Settings.swift */; };
@@ -75,6 +76,7 @@
 		C7A908D82C998E8F00AED0F7 /* EditDeckPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDeckPopUp.swift; sourceTree = "<group>"; };
 		C7A908DD2C99971200AED0F7 /* DecksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksList.swift; sourceTree = "<group>"; };
 		C7A908DF2C99A21000AED0F7 /* DeletedDecksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedDecksView.swift; sourceTree = "<group>"; };
+		C7AA59C42CAAFFCC0030559D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		C7CE51692CA01C1500E79301 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		C7CE516B2CA0260B00E79301 /* AppStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateView.swift; sourceTree = "<group>"; };
 		C7CE516D2CA0376700E79301 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 		C7419BED2C9052A7006BA8AE = {
 			isa = PBXGroup;
 			children = (
+				C7AA59C42CAAFFCC0030559D /* Localizable.xcstrings */,
 				C7419BF82C9052A7006BA8AE /* DuelStats MTG */,
 				C7419BF72C9052A7006BA8AE /* Products */,
 			);
@@ -257,6 +260,8 @@
 			dependencies = (
 			);
 			name = "DuelStats MTG";
+			packageProductDependencies = (
+			);
 			productName = "DuelStats MTG";
 			productReference = C7419BF62C9052A7006BA8AE /* DuelStats MTG.app */;
 			productType = "com.apple.product-type.application";
@@ -283,8 +288,12 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = C7419BED2C9052A7006BA8AE;
+			packageReferences = (
+				C7AA59C12CAAA8700030559D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+			);
 			productRefGroup = C7419BF72C9052A7006BA8AE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -301,6 +310,7 @@
 			files = (
 				C7419C012C9052A9006BA8AE /* Preview Assets.xcassets in Resources */,
 				C7419BFE2C9052A9006BA8AE /* Assets.xcassets in Resources */,
+				C7AA59C52CAAFFCC0030559D /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +562,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C7AA59C12CAAA8700030559D /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = C7419BEE2C9052A7006BA8AE /* Project object */;
 }

@@ -96,7 +96,7 @@ struct MatchView: View {
             
             MenuView()
             
-            WinnerPopUp(someoneWon: $someoneWon, winner: $winner, deck: $winnerDeck, title: "Did \(winner.name) won?", subtitle: "Deck: \(winnerDeck.name)")
+            WinnerPopUp(someoneWon: $someoneWon, winner: $winner, deck: $winnerDeck, title: "Is \(winner.name) the winner?", subtitle: "Deck: \(winnerDeck.name)")
         }
     }
 }

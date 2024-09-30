@@ -24,16 +24,17 @@ struct DecksList: View {
                             .font(.caption)
                             .foregroundStyle(.orange)
                     }
-                    .padding(5)
+                    .padding(10)
                     .background {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
-                                .foregroundStyle(.black.opacity(0.6))
+                                .foregroundStyle(.black.opacity(0.8))
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(lineWidth: 3)
                                 .foregroundStyle(deckSelected == deck ? .orange : .black)
                         }
                     }
+                    .padding(5)
                     .onTapGesture {
                         deckSelected = deck
                     }
@@ -41,5 +42,6 @@ struct DecksList: View {
             }
             .padding(.leading)
         }
+        .scrollIndicators(.never)
     }
 }

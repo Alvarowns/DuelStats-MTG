@@ -63,6 +63,7 @@ struct InkeeperList: View {
                                         }
                                         .padding(.vertical, 10)
                                     }
+                                    .padding(5)
                                 }
                                 .listRowBackground(
                                     ZStack {
@@ -72,6 +73,7 @@ struct InkeeperList: View {
                                             .stroke(lineWidth: 3)
                                             .foregroundStyle(.black)
                                     }
+                                        .padding(5)
                                 )
                             }
                             .onDelete(perform: deletePlayer)
