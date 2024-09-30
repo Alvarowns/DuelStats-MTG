@@ -132,7 +132,7 @@ struct MatchesPlayedView: View {
                     }
                 }
                 
-                InfoPopUp(showInfo: $showInfo, title: "You can swipe left to delete any match", subtitle: "", message: "Be careful, this action will remove the match permanently!")
+                InfoPopUp(showInfo: $showInfo, title: String(localized: "You can swipe left to delete any match"), subtitle: "", message: String(localized:"Be careful, this action will remove the match permanently!"))
             }
             .searchable(text: $search, prompt: "Search for a player")
             .fullScreenCover(isPresented: $settings) {

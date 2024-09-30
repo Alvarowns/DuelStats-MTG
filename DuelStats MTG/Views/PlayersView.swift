@@ -58,7 +58,7 @@ struct PlayersView: View {
                     MatchView()
                 }
                 
-                InfoPopUp(showInfo: $showInfo, title: "You can delete any player swiping left\n\nPlayers marked as favorites will appear first", subtitle: "Be careful, deleting a player is permanent action!", message: "")
+                InfoPopUp(showInfo: $showInfo, title: String(localized: "You can delete any player swiping left\n\nPlayers marked as favorites will appear first"), subtitle: "", message: String(localized: "Be careful, deleting a player is permanent action!"))
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {

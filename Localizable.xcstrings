@@ -141,6 +141,26 @@
         }
       }
     },
+    "Be careful, deleting a player is permanent action!" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Cuidado, borrar un jugador es una acción permanente!"
+          }
+        }
+      }
+    },
+    "Be careful, this action will remove the match permanently!" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Cuidado, esta acción borrará la partida permanentemente!"
+          }
+        }
+      }
+    },
     "Cancel" : {
       "localizations" : {
         "es" : {
@@ -177,6 +197,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nombre del mazo"
+          }
+        }
+      }
+    },
+    "Deck: %@" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mazo: %@"
           }
         }
       }
@@ -237,6 +267,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Formato:"
+          }
+        }
+      }
+    },
+    "Is %@ the winner?" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Ha ganado %@?"
           }
         }
       }
@@ -567,6 +607,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "¡Puedes añadir y editar mazos después!"
+          }
+        }
+      }
+    },
+    "You can delete any player swiping left\n\nPlayers marked as favorites will appear first" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puedes borrar cualquier jugador deslizando hacia la izquierda\n\nLos jugadores marcados como favoritos aparecerán primero"
+          }
+        }
+      }
+    },
+    "You can swipe left to delete any match" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puedes deslizar hacia la izquierda para borrar cualquier partida"
           }
         }
       }
