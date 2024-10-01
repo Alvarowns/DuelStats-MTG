@@ -271,6 +271,16 @@
         }
       }
     },
+    "Inkeeper" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taberna"
+          }
+        }
+      }
+    },
     "Is %@ the winner?" : {
       "localizations" : {
         "es" : {
@@ -467,16 +477,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nueva Partida"
-          }
-        }
-      }
-    },
-    "The Inkeeper" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Taberna"
           }
         }
       }
