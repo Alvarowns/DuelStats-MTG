@@ -27,6 +27,8 @@ struct PlayerView: View {
     
     let fondoNames: [String] = ["cuadrado1", "cuadrado2","cuadrado3","cuadrado4","cuadrado5","cuadrado6","cuadrado7","cuadrado8","cuadrado9","cuadrado10","cuadrado11","cuadrado12","cuadrado13"]
     
+    let fondoIpadNames: [String] = ["horizontal2", "horizontal3", "horizontal4", "horizontal5", "horizontal6", "horizontal7", "horizontal8", "horizontal9", "horizontal10", "horizontal11"]
+    
     let player: Player
     let deck: Deck
     
@@ -217,17 +219,32 @@ struct PlayerView: View {
                 ZStack {
                     ScrollView(.horizontal) {
                         HStack {
-                            ForEach(fondoNames, id: \.self) { fondo in
-                                Image(fondo)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                                    .frame(maxWidth: 200, maxHeight: 200)
-                                    .onTapGesture {
-                                        self.fondo = UIImage(imageLiteralResourceName: fondo)
-                                        changeImage.toggle()
-                                    }
-                                    .shadowPop()
+                            if horizontalSizeClass == .compact {
+                                ForEach(fondoNames, id: \.self) { fondo in
+                                    Image(fondo)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                                        .frame(maxWidth: 200, maxHeight: 200)
+                                        .onTapGesture {
+                                            self.fondo = UIImage(imageLiteralResourceName: fondo)
+                                            changeImage.toggle()
+                                        }
+                                        .shadowPop()
+                                }
+                            } else {
+                                ForEach(fondoIpadNames, id: \.self) { fondo in
+                                    Image(fondo)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                                        .frame(maxWidth: 200, maxHeight: 200)
+                                        .onTapGesture {
+                                            self.fondoIpad = UIImage(imageLiteralResourceName: fondo)
+                                            changeImage.toggle()
+                                        }
+                                        .shadowPop()
+                                }
                             }
                         }
                         .padding()
