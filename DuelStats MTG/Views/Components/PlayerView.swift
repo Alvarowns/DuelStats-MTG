@@ -240,7 +240,7 @@ struct PlayerView: View {
                                         .clipShape(RoundedRectangle(cornerRadius: 16))
                                         .frame(maxWidth: 200, maxHeight: 200)
                                         .onTapGesture {
-                                            self.fondoIpad = UIImage(imageLiteralResourceName: fondo)
+                                            self.fondoIpad  = UIImage(imageLiteralResourceName: fondo)
                                             changeImage.toggle()
                                         }
                                         .shadowPop()
