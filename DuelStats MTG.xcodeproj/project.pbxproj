@@ -22,6 +22,7 @@
 		C7419C112C9053A1006BA8AE /* MainVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7419C102C9053A1006BA8AE /* MainVM.swift */; };
 		C7419C132C90573E006BA8AE /* PlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7419C122C90573E006BA8AE /* PlayersView.swift */; };
 		C775ABEC2CB6E6F30038622E /* DuelStats_MTGTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C775ABEB2CB6E6F30038622E /* DuelStats_MTGTests.swift */; };
+		C78691512DA3D1F400DE43AB /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78691502DA3D1F400DE43AB /* Test.swift */; };
 		C7A11E742C981CED00C8990D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A11E732C981CED00C8990D /* MenuView.swift */; };
 		C7A11E762C98A1D500C8990D /* WinnerPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A11E752C98A1D500C8990D /* WinnerPopUp.swift */; };
 		C7A74FCF2C90663C00DE2D4E /* ContainerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A74FCE2C90663C00DE2D4E /* ContainerModel.swift */; };
@@ -77,6 +78,7 @@
 		C7419C122C90573E006BA8AE /* PlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersView.swift; sourceTree = "<group>"; };
 		C775ABE92CB6E6F30038622E /* DuelStats MTGTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DuelStats MTGTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C775ABEB2CB6E6F30038622E /* DuelStats_MTGTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelStats_MTGTests.swift; sourceTree = "<group>"; };
+		C78691502DA3D1F400DE43AB /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		C7A11E732C981CED00C8990D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		C7A11E752C98A1D500C8990D /* WinnerPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerPopUp.swift; sourceTree = "<group>"; };
 		C7A74FCE2C90663C00DE2D4E /* ContainerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerModel.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				C775ABEB2CB6E6F30038622E /* DuelStats_MTGTests.swift */,
+				C78691502DA3D1F400DE43AB /* Test.swift */,
 			);
 			path = "DuelStats MTGTests";
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C775ABEC2CB6E6F30038622E /* DuelStats_MTGTests.swift in Sources */,
+				C78691512DA3D1F400DE43AB /* Test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
