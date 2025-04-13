@@ -8,6 +8,7 @@
 import SwiftUI
 
 protocol DataInteractor {
+    func getJSON<JSON>(request: URLRequest, type: JSON.Type) async throws -> JSON where JSON: Codable 
 }
 
 struct Network: DataInteractor {

@@ -178,14 +178,11 @@
 			isa = PBXGroup;
 			children = (
 				C7CE516B2CA0260B00E79301 /* AppStateView.swift */,
-				C73729902CA32E9E001F40EB /* SplashView.swift */,
 				C7CE51692CA01C1500E79301 /* MainView.swift */,
-				C71813582C920DFA00788C2B /* TabBarView.swift */,
-				C7A74FDE2C91F7BF00DE2D4E /* MatchesPlayedView.swift */,
-				C7419C122C90573E006BA8AE /* PlayersView.swift */,
-				C720EE752C9605A5006F3A5C /* PrepareMatch.swift */,
-				C720EE792C97473B006F3A5C /* PrepareDecksView.swift */,
-				C7A74FE22C91FF2800DE2D4E /* MatchView.swift */,
+				C7F70F092DABC6F8001513B6 /* Splash */,
+				C7F70F052DABC677001513B6 /* TabBar */,
+				C7F70F062DABC681001513B6 /* Players */,
+				C7F70F082DABC6CD001513B6 /* Match */,
 				C7419C0B2C9052E4006BA8AE /* Components */,
 			);
 			path = Views;
@@ -275,6 +272,49 @@
 				C7A11E752C98A1D500C8990D /* WinnerPopUp.swift */,
 			);
 			path = PopUps;
+			sourceTree = "<group>";
+		};
+		C7F70F052DABC677001513B6 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				C71813582C920DFA00788C2B /* TabBarView.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		C7F70F062DABC681001513B6 /* Players */ = {
+			isa = PBXGroup;
+			children = (
+				C7419C122C90573E006BA8AE /* PlayersView.swift */,
+			);
+			path = Players;
+			sourceTree = "<group>";
+		};
+		C7F70F072DABC690001513B6 /* PrepareMatch */ = {
+			isa = PBXGroup;
+			children = (
+				C720EE752C9605A5006F3A5C /* PrepareMatch.swift */,
+				C720EE792C97473B006F3A5C /* PrepareDecksView.swift */,
+			);
+			path = PrepareMatch;
+			sourceTree = "<group>";
+		};
+		C7F70F082DABC6CD001513B6 /* Match */ = {
+			isa = PBXGroup;
+			children = (
+				C7A74FDE2C91F7BF00DE2D4E /* MatchesPlayedView.swift */,
+				C7A74FE22C91FF2800DE2D4E /* MatchView.swift */,
+				C7F70F072DABC690001513B6 /* PrepareMatch */,
+			);
+			path = Match;
+			sourceTree = "<group>";
+		};
+		C7F70F092DABC6F8001513B6 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				C73729902CA32E9E001F40EB /* SplashView.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
