@@ -40,6 +40,10 @@
 		C7CE516C2CA0260B00E79301 /* AppStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE516B2CA0260B00E79301 /* AppStateView.swift */; };
 		C7CE516E2CA0376700E79301 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE516D2CA0376700E79301 /* Settings.swift */; };
 		C7CE51722CA17A3D00E79301 /* PlayerSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CE51712CA17A3D00E79301 /* PlayerSmallView.swift */; };
+		C7E67C4E2DAD85070072BCD5 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E67C4C2DAD85070072BCD5 /* Dependencies.swift */; };
+		C7E67C502DAD85120072BCD5 /* DependencyInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E67C4F2DAD85120072BCD5 /* DependencyInjector.swift */; };
+		C7E67C522DAD8B270072BCD5 /* NetworkVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E67C512DAD8B270072BCD5 /* NetworkVM.swift */; };
+		C7F70F0C2DABD1CA001513B6 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F70F0B2DABD1CA001513B6 /* Interactor.swift */; };
 		C7F7F22A2C9498A700E6DB0E /* PlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F7F2292C9498A700E6DB0E /* PlayerProfile.swift */; };
 		C7F7F22C2C94998B00E6DB0E /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F7F22B2C94998B00E6DB0E /* Cards.swift */; };
 		C7F7F2352C949B8900E6DB0E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F7F22F2C949B8900E6DB0E /* Network.swift */; };
@@ -96,6 +100,10 @@
 		C7CE516B2CA0260B00E79301 /* AppStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateView.swift; sourceTree = "<group>"; };
 		C7CE516D2CA0376700E79301 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C7CE51712CA17A3D00E79301 /* PlayerSmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSmallView.swift; sourceTree = "<group>"; };
+		C7E67C4C2DAD85070072BCD5 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		C7E67C4F2DAD85120072BCD5 /* DependencyInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjector.swift; sourceTree = "<group>"; };
+		C7E67C512DAD8B270072BCD5 /* NetworkVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkVM.swift; sourceTree = "<group>"; };
+		C7F70F0B2DABD1CA001513B6 /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		C7F7F2292C9498A700E6DB0E /* PlayerProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProfile.swift; sourceTree = "<group>"; };
 		C7F7F22B2C94998B00E6DB0E /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 		C7F7F22F2C949B8900E6DB0E /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -155,6 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				C7419BF92C9052A7006BA8AE /* DuelStats_MTGApp.swift */,
+				C7E67C4D2DAD85070072BCD5 /* DependencyInjector */,
+				C7F70F0A2DABD19D001513B6 /* Interactor */,
 				C7419C072C9052B3006BA8AE /* Views */,
 				C7419C082C9052B7006BA8AE /* VModels */,
 				C7419C092C9052BE006BA8AE /* Models */,
@@ -192,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				C7419C102C9053A1006BA8AE /* MainVM.swift */,
+				C7E67C512DAD8B270072BCD5 /* NetworkVM.swift */,
 			);
 			path = VModels;
 			sourceTree = "<group>";
@@ -274,6 +285,15 @@
 			path = PopUps;
 			sourceTree = "<group>";
 		};
+		C7E67C4D2DAD85070072BCD5 /* DependencyInjector */ = {
+			isa = PBXGroup;
+			children = (
+				C7E67C4C2DAD85070072BCD5 /* Dependencies.swift */,
+				C7E67C4F2DAD85120072BCD5 /* DependencyInjector.swift */,
+			);
+			path = DependencyInjector;
+			sourceTree = "<group>";
+		};
 		C7F70F052DABC677001513B6 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +335,14 @@
 				C73729902CA32E9E001F40EB /* SplashView.swift */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		C7F70F0A2DABD19D001513B6 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				C7F70F0B2DABD1CA001513B6 /* Interactor.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -424,6 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7E67C4E2DAD85070072BCD5 /* Dependencies.swift in Sources */,
 				C7A908E02C99A21000AED0F7 /* DeletedDecksView.swift in Sources */,
 				C7419C132C90573E006BA8AE /* PlayersView.swift in Sources */,
 				C7A74FE32C91FF2800DE2D4E /* MatchView.swift in Sources */,
@@ -445,6 +474,8 @@
 				C7F7F22C2C94998B00E6DB0E /* Cards.swift in Sources */,
 				C720EE762C9605A5006F3A5C /* PrepareMatch.swift in Sources */,
 				C719EEFC2C93637C00C9177A /* InfoPopUp.swift in Sources */,
+				C7E67C502DAD85120072BCD5 /* DependencyInjector.swift in Sources */,
+				C7E67C522DAD8B270072BCD5 /* NetworkVM.swift in Sources */,
 				C7F7F23A2C949B8900E6DB0E /* URLRequest.swift in Sources */,
 				C7CE516E2CA0376700E79301 /* Settings.swift in Sources */,
 				C7F7F2372C949B8900E6DB0E /* NetworkStatus.swift in Sources */,
@@ -456,6 +487,7 @@
 				C7A11E742C981CED00C8990D /* MenuView.swift in Sources */,
 				C720EE7A2C97473B006F3A5C /* PrepareDecksView.swift in Sources */,
 				C720EE742C95FD18006F3A5C /* Extensions.swift in Sources */,
+				C7F70F0C2DABD1CA001513B6 /* Interactor.swift in Sources */,
 				C7F7F22A2C9498A700E6DB0E /* PlayerProfile.swift in Sources */,
 				C7A11E762C98A1D500C8990D /* WinnerPopUp.swift in Sources */,
 				C7419BFA2C9052A7006BA8AE /* DuelStats_MTGApp.swift in Sources */,

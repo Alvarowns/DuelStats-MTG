@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "84F89A5C-2976-4DBD-831B-24A1C8042AAF"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "34751B65-B395-472D-9528-649110CBAE07"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DuelStats MTG/VModels/NetworkVM.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "getCardsByName(name:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "34751B65-B395-472D-9528-649110CBAE07 - 8d2b7c6158941940"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for DuelStats_MTG.NetworkVM.getCardsByName(name: Swift.String) async -&gt; ()"
+                  moduleName = "DuelStats MTG.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alvarowns/Developer/DuelStats%20MTG/DuelStats%20MTG/VModels/NetworkVM.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25">
+               </Location>
+               <Location
+                  uuid = "34751B65-B395-472D-9528-649110CBAE07 - cfac1eecb49c6582"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for DuelStats_MTG.NetworkVM.getCardsByName(name: Swift.String) async -&gt; ()"
+                  moduleName = "DuelStats MTG.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alvarowns/Developer/DuelStats%20MTG/DuelStats%20MTG/VModels/NetworkVM.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25">
+               </Location>
+               <Location
+                  uuid = "34751B65-B395-472D-9528-649110CBAE07 - 159929cea1ad5546"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for DuelStats_MTG.NetworkVM.getCardsByName(name: Swift.String) async -&gt; ()"
+                  moduleName = "DuelStats MTG.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alvarowns/Developer/DuelStats%20MTG/DuelStats%20MTG/VModels/NetworkVM.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25">
+               </Location>
+               <Location
+                  uuid = "34751B65-B395-472D-9528-649110CBAE07 - 6036c06526d1f345"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for DuelStats_MTG.NetworkVM.getCardsByName(name: Swift.String) async -&gt; ()"
+                  moduleName = "DuelStats MTG.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alvarowns/Developer/DuelStats%20MTG/DuelStats%20MTG/VModels/NetworkVM.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "94C0E68E-6646-4545-8969-1011C5924CDB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DuelStats MTG/VModels/NetworkVM.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "getCardsByName(name:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FF743607-14FD-482B-ADDF-80948A68D802"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DuelStats MTG/VModels/NetworkVM.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "getCardsByName(name:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
